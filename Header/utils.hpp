@@ -38,7 +38,7 @@ bool is_sorted(const std::vector<T>& data, SortOrder order = SortOrder::Ascendin
 
 std::vector<int> generate_random_data(std::size_t size,
                                       int min_value = 0,
-                                      int max_value = 1000000);
+                                                      int max_value = 1000000);
 std::vector<int> generate_partially_sorted_data(std::size_t size,
                                                 double sorted_fraction = 0.5);
 std::vector<int> generate_reverse_sorted_data(std::size_t size);
