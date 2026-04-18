@@ -1,0 +1,46 @@
+algorithm,data_type,size,time_ms,sorted_correctly
+Merge sort,Random data,10000,8.284,yes
+Merge sort,Random data,50000,37.615,yes
+Merge sort,Random data,100000,76.853,yes
+Merge sort,Random data,500000,515.072,yes
+Merge sort,Random data,1000000,1131.598,yes
+Merge sort,Partially sorted data,10000,7.548,yes
+Merge sort,Partially sorted data,50000,39.092,yes
+Merge sort,Partially sorted data,100000,75.744,yes
+Merge sort,Partially sorted data,500000,462.449,yes
+Merge sort,Partially sorted data,1000000,1303.418,yes
+Merge sort,Reverse sorted data,10000,9.748,yes
+Merge sort,Reverse sorted data,50000,55.519,yes
+Merge sort,Reverse sorted data,100000,117.209,yes
+Merge sort,Reverse sorted data,500000,670.035,yes
+Merge sort,Reverse sorted data,1000000,1419.564,yes
+Quicksort,Random data,10000,9.049,yes
+Quicksort,Random data,50000,45.215,yes
+Quicksort,Random data,100000,94.829,yes
+Quicksort,Random data,500000,531.549,yes
+Quicksort,Random data,1000000,1076.445,yes
+Quicksort,Partially sorted data,10000,7.520,yes
+Quicksort,Partially sorted data,50000,37.984,yes
+Quicksort,Partially sorted data,100000,57.997,yes
+Quicksort,Partially sorted data,500000,252.308,yes
+Quicksort,Partially sorted data,1000000,479.059,yes
+Quicksort,Reverse sorted data,10000,3.463,yes
+Quicksort,Reverse sorted data,50000,24.142,yes
+Quicksort,Reverse sorted data,100000,54.811,yes
+Quicksort,Reverse sorted data,500000,353.322,yes
+Quicksort,Reverse sorted data,1000000,698.989,yes
+Introsort,Random data,10000,5.079,yes
+Introsort,Random data,50000,29.172,yes
+Introsort,Random data,100000,54.995,yes
+Introsort,Random data,500000,343.105,yes
+Introsort,Random data,1000000,618.104,yes
+Introsort,Partially sorted data,10000,3.482,yes
+Introsort,Partially sorted data,50000,23.785,yes
+Introsort,Partially sorted data,100000,44.073,yes
+Introsort,Partially sorted data,500000,250.564,yes
+Introsort,Partially sorted data,1000000,501.382,yes
+Introsort,Reverse sorted data,10000,4.260,yes
+Introsort,Reverse sorted data,50000,27.398,yes
+Introsort,Reverse sorted data,100000,70.469,yes
+Introsort,Reverse sorted data,500000,377.513,yes
+Introsort,Reverse sorted data,1000000,749.240,yes
