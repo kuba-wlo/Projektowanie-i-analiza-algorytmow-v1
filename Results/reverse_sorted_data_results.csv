@@ -1,0 +1,151 @@
+algorithm,data_type,size,run_number,time_ms,sorted_correctly
+Merge sort,Reverse sorted data,10000,1,6.003,yes
+Merge sort,Reverse sorted data,10000,2,5.501,yes
+Merge sort,Reverse sorted data,10000,3,5.271,yes
+Merge sort,Reverse sorted data,10000,4,5.335,yes
+Merge sort,Reverse sorted data,10000,5,5.132,yes
+Merge sort,Reverse sorted data,10000,6,4.870,yes
+Merge sort,Reverse sorted data,10000,7,4.750,yes
+Merge sort,Reverse sorted data,10000,8,4.029,yes
+Merge sort,Reverse sorted data,10000,9,3.400,yes
+Merge sort,Reverse sorted data,10000,10,3.512,yes
+Merge sort,Reverse sorted data,50000,1,20.936,yes
+Merge sort,Reverse sorted data,50000,2,23.099,yes
+Merge sort,Reverse sorted data,50000,3,23.015,yes
+Merge sort,Reverse sorted data,50000,4,26.283,yes
+Merge sort,Reverse sorted data,50000,5,28.066,yes
+Merge sort,Reverse sorted data,50000,6,28.477,yes
+Merge sort,Reverse sorted data,50000,7,21.195,yes
+Merge sort,Reverse sorted data,50000,8,19.853,yes
+Merge sort,Reverse sorted data,50000,9,20.592,yes
+Merge sort,Reverse sorted data,50000,10,19.840,yes
+Merge sort,Reverse sorted data,100000,1,44.492,yes
+Merge sort,Reverse sorted data,100000,2,49.863,yes
+Merge sort,Reverse sorted data,100000,3,44.176,yes
+Merge sort,Reverse sorted data,100000,4,47.349,yes
+Merge sort,Reverse sorted data,100000,5,44.746,yes
+Merge sort,Reverse sorted data,100000,6,51.933,yes
+Merge sort,Reverse sorted data,100000,7,51.637,yes
+Merge sort,Reverse sorted data,100000,8,51.405,yes
+Merge sort,Reverse sorted data,100000,9,44.871,yes
+Merge sort,Reverse sorted data,100000,10,47.468,yes
+Merge sort,Reverse sorted data,500000,1,270.533,yes
+Merge sort,Reverse sorted data,500000,2,293.580,yes
+Merge sort,Reverse sorted data,500000,3,261.723,yes
+Merge sort,Reverse sorted data,500000,4,284.698,yes
+Merge sort,Reverse sorted data,500000,5,288.276,yes
+Merge sort,Reverse sorted data,500000,6,326.211,yes
+Merge sort,Reverse sorted data,500000,7,284.493,yes
+Merge sort,Reverse sorted data,500000,8,279.769,yes
+Merge sort,Reverse sorted data,500000,9,290.567,yes
+Merge sort,Reverse sorted data,500000,10,290.181,yes
+Merge sort,Reverse sorted data,1000000,1,609.817,yes
+Merge sort,Reverse sorted data,1000000,2,622.684,yes
+Merge sort,Reverse sorted data,1000000,3,655.702,yes
+Merge sort,Reverse sorted data,1000000,4,613.784,yes
+Merge sort,Reverse sorted data,1000000,5,588.216,yes
+Merge sort,Reverse sorted data,1000000,6,570.714,yes
+Merge sort,Reverse sorted data,1000000,7,570.291,yes
+Merge sort,Reverse sorted data,1000000,8,616.051,yes
+Merge sort,Reverse sorted data,1000000,9,598.406,yes
+Merge sort,Reverse sorted data,1000000,10,586.669,yes
+Quicksort,Reverse sorted data,10000,1,11.015,yes
+Quicksort,Reverse sorted data,10000,2,8.772,yes
+Quicksort,Reverse sorted data,10000,3,12.590,yes
+Quicksort,Reverse sorted data,10000,4,9.453,yes
+Quicksort,Reverse sorted data,10000,5,5.342,yes
+Quicksort,Reverse sorted data,10000,6,5.030,yes
+Quicksort,Reverse sorted data,10000,7,8.680,yes
+Quicksort,Reverse sorted data,10000,8,13.521,yes
+Quicksort,Reverse sorted data,10000,9,9.895,yes
+Quicksort,Reverse sorted data,10000,10,8.782,yes
+Quicksort,Reverse sorted data,50000,1,59.299,yes
+Quicksort,Reverse sorted data,50000,2,57.620,yes
+Quicksort,Reverse sorted data,50000,3,54.427,yes
+Quicksort,Reverse sorted data,50000,4,55.281,yes
+Quicksort,Reverse sorted data,50000,5,55.251,yes
+Quicksort,Reverse sorted data,50000,6,60.964,yes
+Quicksort,Reverse sorted data,50000,7,55.667,yes
+Quicksort,Reverse sorted data,50000,8,55.904,yes
+Quicksort,Reverse sorted data,50000,9,57.281,yes
+Quicksort,Reverse sorted data,50000,10,59.286,yes
+Quicksort,Reverse sorted data,100000,1,120.227,yes
+Quicksort,Reverse sorted data,100000,2,125.725,yes
+Quicksort,Reverse sorted data,100000,3,122.566,yes
+Quicksort,Reverse sorted data,100000,4,122.817,yes
+Quicksort,Reverse sorted data,100000,5,123.486,yes
+Quicksort,Reverse sorted data,100000,6,121.501,yes
+Quicksort,Reverse sorted data,100000,7,132.639,yes
+Quicksort,Reverse sorted data,100000,8,118.831,yes
+Quicksort,Reverse sorted data,100000,9,120.352,yes
+Quicksort,Reverse sorted data,100000,10,121.787,yes
+Quicksort,Reverse sorted data,500000,1,718.499,yes
+Quicksort,Reverse sorted data,500000,2,708.635,yes
+Quicksort,Reverse sorted data,500000,3,696.941,yes
+Quicksort,Reverse sorted data,500000,4,711.774,yes
+Quicksort,Reverse sorted data,500000,5,680.875,yes
+Quicksort,Reverse sorted data,500000,6,696.513,yes
+Quicksort,Reverse sorted data,500000,7,698.329,yes
+Quicksort,Reverse sorted data,500000,8,697.307,yes
+Quicksort,Reverse sorted data,500000,9,672.493,yes
+Quicksort,Reverse sorted data,500000,10,685.228,yes
+Quicksort,Reverse sorted data,1000000,1,1462.660,yes
+Quicksort,Reverse sorted data,1000000,2,1623.745,yes
+Quicksort,Reverse sorted data,1000000,3,1502.717,yes
+Quicksort,Reverse sorted data,1000000,4,1466.432,yes
+Quicksort,Reverse sorted data,1000000,5,1506.249,yes
+Quicksort,Reverse sorted data,1000000,6,1551.442,yes
+Quicksort,Reverse sorted data,1000000,7,1495.137,yes
+Quicksort,Reverse sorted data,1000000,8,1524.665,yes
+Quicksort,Reverse sorted data,1000000,9,1529.194,yes
+Quicksort,Reverse sorted data,1000000,10,1534.225,yes
+Introsort,Reverse sorted data,10000,1,3.424,yes
+Introsort,Reverse sorted data,10000,2,3.565,yes
+Introsort,Reverse sorted data,10000,3,3.782,yes
+Introsort,Reverse sorted data,10000,4,3.444,yes
+Introsort,Reverse sorted data,10000,5,3.779,yes
+Introsort,Reverse sorted data,10000,6,3.478,yes
+Introsort,Reverse sorted data,10000,7,3.577,yes
+Introsort,Reverse sorted data,10000,8,4.325,yes
+Introsort,Reverse sorted data,10000,9,4.423,yes
+Introsort,Reverse sorted data,10000,10,5.170,yes
+Introsort,Reverse sorted data,50000,1,31.113,yes
+Introsort,Reverse sorted data,50000,2,21.167,yes
+Introsort,Reverse sorted data,50000,3,24.992,yes
+Introsort,Reverse sorted data,50000,4,23.122,yes
+Introsort,Reverse sorted data,50000,5,23.688,yes
+Introsort,Reverse sorted data,50000,6,25.668,yes
+Introsort,Reverse sorted data,50000,7,24.107,yes
+Introsort,Reverse sorted data,50000,8,26.874,yes
+Introsort,Reverse sorted data,50000,9,26.379,yes
+Introsort,Reverse sorted data,50000,10,23.237,yes
+Introsort,Reverse sorted data,100000,1,54.018,yes
+Introsort,Reverse sorted data,100000,2,50.033,yes
+Introsort,Reverse sorted data,100000,3,62.907,yes
+Introsort,Reverse sorted data,100000,4,77.921,yes
+Introsort,Reverse sorted data,100000,5,48.685,yes
+Introsort,Reverse sorted data,100000,6,46.886,yes
+Introsort,Reverse sorted data,100000,7,50.595,yes
+Introsort,Reverse sorted data,100000,8,55.336,yes
+Introsort,Reverse sorted data,100000,9,71.270,yes
+Introsort,Reverse sorted data,100000,10,45.881,yes
+Introsort,Reverse sorted data,500000,1,329.313,yes
+Introsort,Reverse sorted data,500000,2,349.010,yes
+Introsort,Reverse sorted data,500000,3,291.359,yes
+Introsort,Reverse sorted data,500000,4,310.507,yes
+Introsort,Reverse sorted data,500000,5,379.031,yes
+Introsort,Reverse sorted data,500000,6,338.301,yes
+Introsort,Reverse sorted data,500000,7,304.482,yes
+Introsort,Reverse sorted data,500000,8,330.105,yes
+Introsort,Reverse sorted data,500000,9,319.578,yes
+Introsort,Reverse sorted data,500000,10,293.538,yes
+Introsort,Reverse sorted data,1000000,1,673.472,yes
+Introsort,Reverse sorted data,1000000,2,686.658,yes
+Introsort,Reverse sorted data,1000000,3,639.783,yes
+Introsort,Reverse sorted data,1000000,4,702.592,yes
+Introsort,Reverse sorted data,1000000,5,710.221,yes
+Introsort,Reverse sorted data,1000000,6,666.251,yes
+Introsort,Reverse sorted data,1000000,7,707.404,yes
+Introsort,Reverse sorted data,1000000,8,641.588,yes
+Introsort,Reverse sorted data,1000000,9,650.426,yes
+Introsort,Reverse sorted data,1000000,10,626.503,yes
