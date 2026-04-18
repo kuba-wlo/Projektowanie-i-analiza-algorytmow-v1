@@ -18,7 +18,7 @@ using Comparator = std::function<bool(const T&, const T&)>;
 
 template <typename T>
 bool compare_values(const T& left, const T& right, SortOrder order) {
-    // Jeden helper obsluguje oba kierunki sortowania.
+    // Jeden helper obsługuje oba kierunki sortowania.
     if (order == SortOrder::Descending) {
         return left > right;
     }
@@ -46,7 +46,7 @@ std::vector<int> generate_reverse_sorted_data(std::size_t size);
 
 template <typename T, typename SortFunction>
 double measure_sort_time(std::vector<T>& data, SortFunction sort_function) {
-    // Uzyteczne do prostych lokalnych pomiarow poza glownym benchmarkiem projektu.
+    // Użyteczne do prostych lokalnych pomiarów poza głównym benchmarkiem projektu.
     const auto start_time = std::chrono::high_resolution_clock::now();
     sort_function(data);
     const auto end_time = std::chrono::high_resolution_clock::now();

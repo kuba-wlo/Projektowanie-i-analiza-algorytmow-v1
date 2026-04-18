@@ -11,7 +11,7 @@ namespace sorting {
 namespace {
 
 std::mt19937& random_engine() {
-    // Jeden generator wspoldzielony przez helpery ogranicza koszt ciaglego tworzenia RNG.
+    // Jeden generator współdzielony przez helpery ogranicza koszt ciągłego tworzenia RNG.
     static std::mt19937 engine(std::random_device{}());
     return engine;
 }
@@ -44,7 +44,7 @@ std::vector<int> generate_partially_sorted_data(std::size_t size, double sorted_
     const std::size_t sorted_count = static_cast<std::size_t>(size * sorted_fraction);
     auto shuffled_begin = data.begin() + static_cast<std::ptrdiff_t>(sorted_count);
 
-    // Zachowujemy posortowany prefiks, a mieszamy tylko pozostala czesc tablicy.
+    // Zachowujemy posortowany prefiks, a mieszamy tylko pozostałą część tablicy.
     std::shuffle(shuffled_begin, data.end(), random_engine());
     return data;
 }

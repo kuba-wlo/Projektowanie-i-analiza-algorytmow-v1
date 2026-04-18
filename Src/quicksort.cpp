@@ -15,7 +15,7 @@ std::size_t median_of_three(std::vector<T>& data,
                             SortOrder order) {
     const std::size_t middle = left + (right - left) / 2;
 
-    // Ustaw left <= middle <= right (w sensie wybranego porzadku).
+    // Ustaw left <= middle <= right (w sensie wybranego porządku).
     if (compare_values(data[middle], data[left], order)) {
         std::swap(data[left], data[middle]);
     }
@@ -38,7 +38,7 @@ std::size_t partition(std::vector<T>& data,
                       SortOrder order) {
     const std::size_t pivot_index = median_of_three(data, left, right, order);
     const T pivot_value = data[pivot_index];
-    // Pivot laduje na koncu, a petla buduje partycje po lewej.
+    // Pivot ląduje na końcu, a pętla buduje partycję po lewej.
     std::swap(data[pivot_index], data[right]);
 
     std::size_t smaller_index = left;

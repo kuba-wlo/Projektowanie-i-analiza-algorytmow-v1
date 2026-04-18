@@ -7,7 +7,7 @@
 namespace {
 
 std::string prompt_line(const std::string& label, const std::string& default_value) {
-    // Puste wejscie oznacza "zostaw wartosc domyslna".
+    // Puste wejście oznacza „zostaw wartość domyślną”.
     std::cout << label << " [" << default_value << "]: ";
 
     std::string input;
@@ -31,7 +31,7 @@ int prompt_int(const std::string& label, int default_value) {
         } catch (...) {
         }
 
-        std::cout << "Podaj dodatnia liczbe calkowita.\n";
+        std::cout << "Podaj dodatnią liczbę całkowitą.\n";
     }
 }
 
@@ -47,7 +47,7 @@ unsigned int prompt_unsigned(const std::string& label, unsigned int default_valu
         } catch (...) {
         }
 
-        std::cout << "Podaj poprawna liczbe bez znaku.\n";
+        std::cout << "Podaj poprawną liczbę bez znaku.\n";
     }
 }
 
@@ -76,10 +76,10 @@ void print_separator() {
 void print_settings(const TestSettings& settings) {
     print_separator();
     std::cout << "Aktualne ustawienia:\n";
-    std::cout << "  - Liczba powtorzen: " << settings.repetitions_per_case << '\n';
+    std::cout << "  - Liczba powtórzeń: " << settings.repetitions_per_case << '\n';
     std::cout << "  - Seed: " << settings.base_seed << '\n';
-    std::cout << "  - Bazowa sciezka CSV: " << settings.csv_path << '\n';
-    std::cout << "  - Kierunek sortowania: " << (settings.ascending ? "rosnaco" : "malejaco")
+    std::cout << "  - Bazowa ścieżka CSV: " << settings.csv_path << '\n';
+    std::cout << "  - Kierunek sortowania: " << (settings.ascending ? "rosnąco" : "malejąco")
               << '\n';
     std::cout << "  - Rozmiary tablic: ";
     for (std::size_t index = 0; index < settings.sizes.size(); ++index) {
@@ -94,23 +94,23 @@ void print_settings(const TestSettings& settings) {
 
 void print_requirements() {
     print_separator();
-    std::cout << "Wymagania projektu (skrot):\n";
+    std::cout << "Wymagania projektu (skrót):\n";
     std::cout << "  - 3 algorytmy: merge sort, quicksort, introsort.\n";
     std::cout << "  - Rozmiary: 10k, 50k, 100k, 500k, 1M.\n";
-    std::cout << "  - 100 powtorzen na przypadek.\n";
+    std::cout << "  - 100 powtórzeń na przypadek.\n";
     std::cout << "  - Przypadki: random, prefix 25/50/75/95/99/99.7, reversed.\n";
-    std::cout << "  - Walidacja poprawnosci sortowania po kazdym uruchomieniu.\n";
+    std::cout << "  - Walidacja poprawności sortowania po każdym uruchomieniu.\n";
     print_separator();
 }
 
 void edit_settings(TestSettings& settings) {
-    // Menu edycji modyfikuje ten sam obiekt settings, z ktorego potem startuje benchmark.
+    // Menu edycji modyfikuje ten sam obiekt settings, z którego potem startuje benchmark.
     print_separator();
-    std::cout << "Edycja ustawien (Enter zostawia biezaca wartosc)\n";
-    settings.repetitions_per_case = prompt_int("Liczba powtorzen", settings.repetitions_per_case);
+    std::cout << "Edycja ustawień (Enter zostawia bieżącą wartość)\n";
+    settings.repetitions_per_case = prompt_int("Liczba powtórzeń", settings.repetitions_per_case);
     settings.base_seed = prompt_unsigned("Seed", settings.base_seed);
-    settings.csv_path = prompt_line("Bazowa sciezka CSV", settings.csv_path);
-    settings.ascending = !prompt_yes_no("Sortowanie malejace", !settings.ascending);
+    settings.csv_path = prompt_line("Bazowa ścieżka CSV", settings.csv_path);
+    settings.ascending = !prompt_yes_no("Sortowanie malejące", !settings.ascending);
     print_separator();
 }
 
@@ -125,7 +125,7 @@ int prompt_menu_choice() {
             }
         } catch (...) {
         }
-        std::cout << "Wpisz liczbe od 1 do 5.\n";
+        std::cout << "Wpisz liczbę od 1 do 5.\n";
     }
 }
 
@@ -134,9 +134,9 @@ void show_main_menu() {
     std::cout << "Benchmark sortowania - proste TUI\n";
     std::cout << "  1) Start benchmarku\n";
     std::cout << "  2) Ustawienia benchmarku\n";
-    std::cout << "  3) Pokaz aktualne ustawienia\n";
-    std::cout << "  4) Pokaz wymagania projektu\n";
-    std::cout << "  5) Wyjdz\n";
+    std::cout << "  3) Pokaż aktualne ustawienia\n";
+    std::cout << "  4) Pokaż wymagania projektu\n";
+    std::cout << "  5) Wyjdź\n";
     print_separator();
 }
 
@@ -151,7 +151,7 @@ int main() {
 
     bool running = true;
     while (running) {
-        // Proste TUI pozwala uruchomic testy bez zmiany kodu i rekompilacji.
+        // Proste TUI pozwala uruchomić testy bez zmiany kodu i rekompilacji.
         show_main_menu();
         const int choice = prompt_menu_choice();
 

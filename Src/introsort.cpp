@@ -16,7 +16,7 @@ std::size_t median_of_three(std::vector<T>& data,
                             SortOrder order) {
     const std::size_t middle = left + (right - left) / 2;
 
-    // Ten sam wybor pivota co w quicksort, ale introsort ma dodatkowy bezpiecznik glebi.
+    // Ten sam wybór pivota co w quicksort, ale introsort ma dodatkowy bezpiecznik głębi.
     if (compare_values(data[middle], data[left], order)) {
         std::swap(data[left], data[middle]);
     }
@@ -59,7 +59,7 @@ void heap_sort_range(std::vector<T>& data,
                      std::size_t left,
                      std::size_t right,
                      SortOrder order) {
-    // Sortujemy tylko wycinek [left, right], nie cala tablice.
+    // Sortujemy tylko wycinek [left, right], nie całą tablicę.
     auto begin = data.begin() + static_cast<std::ptrdiff_t>(left);
     auto end = data.begin() + static_cast<std::ptrdiff_t>(right + 1);
 
@@ -82,12 +82,12 @@ void intro_sort_recursive(std::vector<T>& data,
     }
 
     if (depth_limit == 0) {
-        // Przelaczenie na heap sort chroni przed pesymistycznym przypadkiem quicksorta.
+        // Przełączenie na heap sort chroni przed pesymistycznym przypadkiem quicksorta.
         heap_sort_range(data, left, right, order);
         return;
     }
 
-    // Dopoki limit glebi nie zostal wyczerpany, introsort zachowuje sie jak quicksort.
+    // Dopóki limit głębi nie został wyczerpany, introsort zachowuje się jak quicksort.
     const std::size_t pivot_index = partition(data, left, right, order);
 
     if (pivot_index > 0) {

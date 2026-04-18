@@ -15,7 +15,7 @@ namespace {
 
 std::ostream* resolve_csv_stream(const std::map<std::string, std::ostream*>& csv_out,
                                  const char* sorter_name) {
-    // Pozwala zapisac albo do pliku konkretnego sortera, albo do wspolnego strumienia "all".
+    // Pozwala zapisać albo do pliku konkretnego sortera, albo do wspólnego strumienia "all".
     if (const auto iterator = csv_out.find(sorter_name); iterator != csv_out.end()) {
         return iterator->second;
     }
@@ -46,7 +46,7 @@ void make_case(int* first, int* last, CaseKind kind, unsigned int seed) {
     const std::size_t size = static_cast<std::size_t>(last - first);
     std::mt19937 generator(seed);
 
-    // Kazdy przypadek startuje z tej samej uporzadkowanej tablicy 0..n-1.
+    // Każdy przypadek startuje z tej samej uporządkowanej tablicy 0..n-1.
     for (std::size_t index = 0; index < size; ++index) {
         first[index] = static_cast<int>(index);
     }
@@ -81,7 +81,7 @@ void make_case(int* first, int* last, CaseKind kind, unsigned int seed) {
 
     if (shuffle_ratio > 0.0) {
         const std::size_t shuffle_count = static_cast<std::size_t>(size * shuffle_ratio);
-        // Tasujemy tylko koncowke, dzieki czemu poczatek pozostaje w zadanym stopniu posortowany.
+        // Tasujemy tylko końcówkę, dzięki czemu początek pozostaje w zadanym stopniu posortowany.
         std::shuffle(last - static_cast<std::ptrdiff_t>(shuffle_count), last, generator);
     }
 }
@@ -141,7 +141,7 @@ std::vector<std::string> csv_output_paths(const TestSettings& cfg,
     const std::filesystem::path base_path(cfg.csv_path);
 
     for (ISorter* sorter : sorters) {
-        // Przeksztalcamy np. "results.csv" w "results-merge_sort.csv".
+        // Przekształcamy np. "results.csv" w "results-merge_sort.csv".
         const std::string filename =
             base_path.stem().string() + "-" + sorter->name() + base_path.extension().string();
         const std::filesystem::path output_path =
@@ -196,7 +196,7 @@ void run_all(const TestSettings& cfg,
                           spec.kind, cfg.base_seed + static_cast<unsigned int>(repetition));
 
                 for (ISorter* sorter : sorters) {
-                    // Kazdy sorter dostaje identyczne dane wejsciowe w danej probie.
+                    // Każdy sorter dostaje identyczne dane wejściowe w danej próbie.
                     work = base;
                     const char* sorter_name = sorter->name();
 
@@ -227,7 +227,7 @@ void run_all(const TestSettings& cfg,
                 std::ostream* stream = resolve_csv_stream(csv_out, sorter_name);
 
                 if (stream != nullptr) {
-                    // Wiersz average podsumowuje wszystkie proby dla danego rozmiaru i przypadku.
+                    // Wiersz average podsumowuje wszystkie próby dla danego rozmiaru i przypadku.
                     const double average_time = accumulated_times[sorter_name] / cfg.repetitions_per_case;
 
                     (*stream) << std::fixed << std::setprecision(6);
