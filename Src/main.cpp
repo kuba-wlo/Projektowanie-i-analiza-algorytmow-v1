@@ -1,14 +1,11 @@
 #include <iostream>
-#include <vector>
 
-#include "../Header/sorting.hpp"
+#include "../Header/introsort.hpp"
+#include "../Header/merge_sort.hpp"
+#include "../Header/quicksort.hpp"
+#include "../Header/utils.hpp"
 
 int main() {
-    std::vector<int> sample = {5, 2, 4, 1, 3};
-
-    sorting::merge_sort(sample);
-
-    std::cout << "Sorting project skeleton is ready.\n";
-
+    std::cout << "Sorting project scaffold is ready.\n";
     return 0;
 }
