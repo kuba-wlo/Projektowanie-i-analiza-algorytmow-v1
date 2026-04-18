@@ -12,7 +12,7 @@ void intro_sort(std::vector<T>& data, SortOrder order = SortOrder::Ascending);
 
 }  // namespace sorting
 
-// Template definitions are included here so the compiler can instantiate them.
+// Definicje szablonow sa dolaczone tutaj, aby kompilator mogl je instancjonowac.
 #include "../Src/introsort.cpp"
 
 #endif

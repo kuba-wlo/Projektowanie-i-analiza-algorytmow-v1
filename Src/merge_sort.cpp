@@ -18,7 +18,7 @@ void merge_ranges(std::vector<T>& data,
     std::size_t right_index = middle + 1;
     std::size_t buffer_index = left;
 
-    // Merge two sorted halves into a temporary buffer.
+    // Scal dwie posortowane polowy do bufora pomocniczego.
     while (left_index <= middle && right_index <= right) {
         if (compare_values(data[right_index], data[left_index], order)) {
             buffer[buffer_index++] = data[right_index++];
@@ -35,6 +35,7 @@ void merge_ranges(std::vector<T>& data,
         buffer[buffer_index++] = data[right_index++];
     }
 
+    // Przepisz wynik scalania z bufora z powrotem do tablicy.
     for (std::size_t index = left; index <= right; ++index) {
         data[index] = buffer[index];
     }
@@ -52,6 +53,7 @@ void merge_sort_recursive(std::vector<T>& data,
 
     const std::size_t middle = left + (right - left) / 2;
 
+    // Dziel i rzadz: najpierw posortuj obie polowy, potem je scal.
     merge_sort_recursive(data, buffer, left, middle, order);
     merge_sort_recursive(data, buffer, middle + 1, right, order);
     merge_ranges(data, buffer, left, middle, right, order);

@@ -58,6 +58,7 @@ void heap_sort_range(std::vector<T>& data,
                      std::size_t left,
                      std::size_t right,
                      SortOrder order) {
+    // Sortujemy tylko wycinek [left, right], nie cala tablice.
     auto begin = data.begin() + static_cast<std::ptrdiff_t>(left);
     auto end = data.begin() + static_cast<std::ptrdiff_t>(right + 1);
 
@@ -80,7 +81,7 @@ void intro_sort_recursive(std::vector<T>& data,
     }
 
     if (depth_limit == 0) {
-        // Fallback to heap sort protects against worst-case quicksort depth.
+        // Przelaczenie na heap sort chroni przed pesymistycznym przypadkiem quicksorta.
         heap_sort_range(data, left, right, order);
         return;
     }
@@ -104,6 +105,7 @@ int calculate_depth_limit(const std::vector<T>& data) {
         ++depth_limit;
     }
 
+    // Klasyczny limit introsort: 2 * floor(log2(n)).
     return depth_limit * 2;
 }
 

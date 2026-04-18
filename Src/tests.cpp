@@ -11,6 +11,21 @@
 #include <random>
 #include <stdexcept>
 
+namespace {
+
+std::ostream* resolve_csv_stream(const std::map<std::string, std::ostream*>& csv_out,
+                                 const char* sorter_name) {
+    if (const auto iterator = csv_out.find(sorter_name); iterator != csv_out.end()) {
+        return iterator->second;
+    }
+    if (const auto iterator = csv_out.find("all"); iterator != csv_out.end()) {
+        return iterator->second;
+    }
+    return nullptr;
+}
+
+}  // namespace
+
 const std::vector<CaseSpec>& all_cases() {
     static const std::vector<CaseSpec> cases = {
         {CaseKind::RandomAll, "random"},
@@ -177,6 +192,7 @@ void run_all(const TestSettings& cfg,
 
                 for (ISorter* sorter : sorters) {
                     work = base;
+                    const char* sorter_name = sorter->name();
 
                     const double elapsed_ms = measure_sort_ms(*sorter, work, cfg.ascending);
                     const bool valid =
@@ -184,22 +200,16 @@ void run_all(const TestSettings& cfg,
                                   work.data() + static_cast<std::ptrdiff_t>(work.size()),
                                   cfg.ascending);
 
-                    accumulated_times[sorter->name()] += elapsed_ms;
-                    all_valid[sorter->name()] =
-                        all_valid.count(sorter->name()) == 0 ? valid
-                                                             : (all_valid[sorter->name()] && valid);
+                    accumulated_times[sorter_name] += elapsed_ms;
+                    all_valid[sorter_name] =
+                        all_valid.count(sorter_name) == 0 ? valid
+                                                          : (all_valid[sorter_name] && valid);
 
-                    std::ostream* stream = nullptr;
-                    if (const auto iterator = csv_out.find(sorter->name()); iterator != csv_out.end()) {
-                        stream = iterator->second;
-                    } else if (const auto iterator = csv_out.find("all"); iterator != csv_out.end()) {
-                        stream = iterator->second;
-                    }
+                    std::ostream* stream = resolve_csv_stream(csv_out, sorter_name);
 
                     if (stream != nullptr) {
-                        stream->imbue(std::locale::classic());
                         (*stream) << std::fixed << std::setprecision(6);
-                        (*stream) << "trial;" << sorter->name() << ';' << size << ';'
+                        (*stream) << "trial;" << sorter_name << ';' << size << ';'
                                   << spec.name << ';' << repetition << ';' << elapsed_ms << ';'
                                   << (valid ? 1 : 0) << '\n';
                     }
@@ -207,22 +217,16 @@ void run_all(const TestSettings& cfg,
             }
 
             for (ISorter* sorter : sorters) {
-                std::ostream* stream = nullptr;
-                if (const auto iterator = csv_out.find(sorter->name()); iterator != csv_out.end()) {
-                    stream = iterator->second;
-                } else if (const auto iterator = csv_out.find("all"); iterator != csv_out.end()) {
-                    stream = iterator->second;
-                }
+                const char* sorter_name = sorter->name();
+                std::ostream* stream = resolve_csv_stream(csv_out, sorter_name);
 
                 if (stream != nullptr) {
-                    const double average_time =
-                        accumulated_times[sorter->name()] / cfg.repetitions_per_case;
+                    const double average_time = accumulated_times[sorter_name] / cfg.repetitions_per_case;
 
-                    stream->imbue(std::locale::classic());
                     (*stream) << std::fixed << std::setprecision(6);
-                    (*stream) << "average;" << sorter->name() << ';' << size << ';'
+                    (*stream) << "average;" << sorter_name << ';' << size << ';'
                               << spec.name << ';' << -1 << ';' << average_time << ';'
-                              << (all_valid[sorter->name()] ? 1 : 0) << '\n';
+                              << (all_valid[sorter_name] ? 1 : 0) << '\n';
                 }
             }
         }
