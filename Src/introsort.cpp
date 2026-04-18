@@ -16,6 +16,7 @@ std::size_t median_of_three(std::vector<T>& data,
                             SortOrder order) {
     const std::size_t middle = left + (right - left) / 2;
 
+    // Ten sam wybor pivota co w quicksort, ale introsort ma dodatkowy bezpiecznik glebi.
     if (compare_values(data[middle], data[left], order)) {
         std::swap(data[left], data[middle]);
     }
@@ -86,6 +87,7 @@ void intro_sort_recursive(std::vector<T>& data,
         return;
     }
 
+    // Dopoki limit glebi nie zostal wyczerpany, introsort zachowuje sie jak quicksort.
     const std::size_t pivot_index = partition(data, left, right, order);
 
     if (pivot_index > 0) {

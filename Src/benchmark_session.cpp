@@ -53,6 +53,7 @@ public:
     }
 };
 
+// Adaptery ujednolicaja 3 rozne implementacje sortowania pod wspolne API benchmarku.
 std::vector<std::unique_ptr<ISorter>> make_default_sorters() {
     std::vector<std::unique_ptr<ISorter>> sorters;
     sorters.push_back(std::make_unique<MergeSortAdapter>());
@@ -76,6 +77,7 @@ RunArtifacts prepare_sorter_outputs(const TestSettings& cfg, const std::vector<I
             throw std::runtime_error("Could not open per-sorter CSV file.");
         }
 
+        // Kazdy plik dostaje ten sam naglowek, zeby latwo bylo je potem porownywac.
         stream->imbue(std::locale::classic());
         (*stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
 
@@ -99,6 +101,7 @@ BenchmarkOutputs run_default_benchmark(const TestSettings& cfg,
         sorters.push_back(sorter.get());
     }
 
+    // Najpierw wyliczamy sciezki, potem uruchamiamy jedna wspolna sesje benchmarku.
     BenchmarkOutputs outputs;
     outputs.csv_paths = csv_output_paths(cfg, sorters);
 

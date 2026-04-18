@@ -11,6 +11,7 @@
 #include "isorter.hpp"
 
 struct TestSettings {
+    // Rozmiary zgodne z trescia zadania projektowego.
     std::vector<std::size_t> sizes {10'000, 50'000, 100'000, 500'000, 1'000'000};
     int repetitions_per_case = 100;
     unsigned int base_seed = 123456u;
@@ -34,6 +35,7 @@ struct CaseSpec {
     const char* name;
 };
 
+// GUI albo TUI moze podpiac sie tutaj, aby dostawac krotkie komunikaty o postepie.
 using StatusCallback = std::function<void(const std::string&)>;
 
 const std::vector<CaseSpec>& all_cases();
@@ -43,6 +45,7 @@ void make_case(int* first, int* last, CaseKind kind, unsigned int seed);
 bool is_sorted(const int* first, const int* last, bool ascending);
 
 struct RunArtifacts {
+    // owned_csv_streams utrzymuje zycie strumieni, a csv_streams daje prosty dostep po nazwie.
     std::map<std::string, std::unique_ptr<std::ostream>> owned_csv_streams;
     std::map<std::string, std::ostream*> csv_streams;
 };

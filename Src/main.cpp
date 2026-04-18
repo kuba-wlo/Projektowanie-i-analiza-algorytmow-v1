@@ -7,6 +7,7 @@
 namespace {
 
 std::string prompt_line(const std::string& label, const std::string& default_value) {
+    // Puste wejscie oznacza "zostaw wartosc domyslna".
     std::cout << label << " [" << default_value << "]: ";
 
     std::string input;
@@ -103,6 +104,7 @@ void print_requirements() {
 }
 
 void edit_settings(TestSettings& settings) {
+    // Menu edycji modyfikuje ten sam obiekt settings, z ktorego potem startuje benchmark.
     print_separator();
     std::cout << "Edycja ustawien (Enter zostawia biezaca wartosc)\n";
     settings.repetitions_per_case = prompt_int("Liczba powtorzen", settings.repetitions_per_case);
@@ -149,6 +151,7 @@ int main() {
 
     bool running = true;
     while (running) {
+        // Proste TUI pozwala uruchomic testy bez zmiany kodu i rekompilacji.
         show_main_menu();
         const int choice = prompt_menu_choice();
 
