@@ -9,9 +9,9 @@
 int main() {
     std::vector<int> sample = {7, 2, 9, 1, 5, 3};
 
-    sorting::quick_sort(sample, sorting::SortOrder::Descending);
+    sorting::intro_sort(sample, sorting::SortOrder::Ascending);
 
-    std::cout << "Quicksort result: ";
+    std::cout << "Introsort result: ";
     for (const int value : sample) {
         std::cout << value << ' ';
     }
