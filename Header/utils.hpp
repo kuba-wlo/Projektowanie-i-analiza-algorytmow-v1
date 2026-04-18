@@ -1,6 +1,7 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <chrono>
 #include <cstddef>
 #include <functional>
 #include <vector>
@@ -41,6 +42,15 @@ std::vector<int> generate_random_data(std::size_t size,
 std::vector<int> generate_partially_sorted_data(std::size_t size,
                                                 double sorted_fraction = 0.5);
 std::vector<int> generate_reverse_sorted_data(std::size_t size);
+
+template <typename T, typename SortFunction>
+double measure_sort_time(std::vector<T>& data, SortFunction sort_function) {
+    const auto start_time = std::chrono::high_resolution_clock::now();
+    sort_function(data);
+    const auto end_time = std::chrono::high_resolution_clock::now();
+
+    return std::chrono::duration<double, std::milli>(end_time - start_time).count();
+}
 
 }  // namespace sorting
 
