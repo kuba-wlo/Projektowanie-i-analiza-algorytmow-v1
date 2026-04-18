@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "../Header/benchmark_session.hpp"
 
@@ -67,6 +68,76 @@ bool prompt_yes_no(const std::string& label, bool default_value) {
     }
 }
 
+void print_separator() {
+    std::cout << "\n========================================\n";
+}
+
+void print_settings(const TestSettings& settings) {
+    print_separator();
+    std::cout << "Aktualne ustawienia:\n";
+    std::cout << "  - Liczba powtorzen: " << settings.repetitions_per_case << '\n';
+    std::cout << "  - Seed: " << settings.base_seed << '\n';
+    std::cout << "  - Bazowa sciezka CSV: " << settings.csv_path << '\n';
+    std::cout << "  - Kierunek sortowania: " << (settings.ascending ? "rosnaco" : "malejaco")
+              << '\n';
+    std::cout << "  - Rozmiary tablic: ";
+    for (std::size_t index = 0; index < settings.sizes.size(); ++index) {
+        std::cout << settings.sizes[index];
+        if (index + 1 < settings.sizes.size()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << '\n';
+    print_separator();
+}
+
+void print_requirements() {
+    print_separator();
+    std::cout << "Wymagania projektu (skrot):\n";
+    std::cout << "  - 3 algorytmy: merge sort, quicksort, introsort.\n";
+    std::cout << "  - Rozmiary: 10k, 50k, 100k, 500k, 1M.\n";
+    std::cout << "  - 100 powtorzen na przypadek.\n";
+    std::cout << "  - Przypadki: random, prefix 25/50/75/95/99/99.7, reversed.\n";
+    std::cout << "  - Walidacja poprawnosci sortowania po kazdym uruchomieniu.\n";
+    print_separator();
+}
+
+void edit_settings(TestSettings& settings) {
+    print_separator();
+    std::cout << "Edycja ustawien (Enter zostawia biezaca wartosc)\n";
+    settings.repetitions_per_case = prompt_int("Liczba powtorzen", settings.repetitions_per_case);
+    settings.base_seed = prompt_unsigned("Seed", settings.base_seed);
+    settings.csv_path = prompt_line("Bazowa sciezka CSV", settings.csv_path);
+    settings.ascending = !prompt_yes_no("Sortowanie malejace", !settings.ascending);
+    print_separator();
+}
+
+int prompt_menu_choice() {
+    while (true) {
+        const std::string input = prompt_line("Wybierz opcje", "1");
+        try {
+            std::size_t processed = 0;
+            const int value = std::stoi(input, &processed);
+            if (processed == input.size() && value >= 1 && value <= 5) {
+                return value;
+            }
+        } catch (...) {
+        }
+        std::cout << "Wpisz liczbe od 1 do 5.\n";
+    }
+}
+
+void show_main_menu() {
+    print_separator();
+    std::cout << "Benchmark sortowania - proste TUI\n";
+    std::cout << "  1) Start benchmarku\n";
+    std::cout << "  2) Ustawienia benchmarku\n";
+    std::cout << "  3) Pokaz aktualne ustawienia\n";
+    std::cout << "  4) Pokaz wymagania projektu\n";
+    std::cout << "  5) Wyjdz\n";
+    print_separator();
+}
+
 }  // namespace
 
 int main() {
@@ -76,17 +147,34 @@ int main() {
     settings.csv_path = "Results/results.csv";
     settings.ascending = true;
 
-    std::cout << "Pelny benchmark sortowania\n";
-    std::cout << "Nacisnij Enter, aby zaakceptowac wartosc domyslna.\n\n";
+    bool running = true;
+    while (running) {
+        show_main_menu();
+        const int choice = prompt_menu_choice();
 
-    settings.repetitions_per_case = prompt_int("Liczba powtorzen", settings.repetitions_per_case);
-    settings.base_seed = prompt_unsigned("Seed", settings.base_seed);
-    settings.csv_path = prompt_line("Bazowa sciezka CSV", settings.csv_path);
-    settings.ascending = !prompt_yes_no("Sortowanie malejace", false);
-
-    std::cout << "\nUruchamiam benchmark...\n";
-    run_default_benchmark(settings, true);
-    std::cout << "\nGotowe. Wyniki zapisane w katalogu Results.\n";
+        switch (choice) {
+            case 1:
+                print_settings(settings);
+                std::cout << "Uruchamiam benchmark...\n";
+                run_default_benchmark(settings, true);
+                std::cout << "\nGotowe. Wyniki zapisane w katalogu Results.\n";
+                break;
+            case 2:
+                edit_settings(settings);
+                break;
+            case 3:
+                print_settings(settings);
+                break;
+            case 4:
+                print_requirements();
+                break;
+            case 5:
+                running = false;
+                break;
+            default:
+                break;
+        }
+    }
 
     return 0;
 }
