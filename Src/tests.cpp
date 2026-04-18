@@ -1,4 +1,4 @@
-#include "../Header/Tests.hpp"
+#include "../Header/tests.hpp"
 
 #include <algorithm>
 #include <chrono>

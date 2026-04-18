@@ -1,4 +1,4 @@
-#include "../Header/BenchmarkSession.hpp"
+#include "../Header/benchmark_session.hpp"
 
 #include <filesystem>
 #include <fstream>
@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "../Header/ISorter.hpp"
+#include "../Header/isorter.hpp"
 #include "../Header/introsort.hpp"
 #include "../Header/merge_sort.hpp"
 #include "../Header/quicksort.hpp"

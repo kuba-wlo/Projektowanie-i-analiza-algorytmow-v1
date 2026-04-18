@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "../Header/BenchmarkSession.hpp"
+#include "../Header/benchmark_session.hpp"
 
 namespace {
 

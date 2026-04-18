@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "Tests.hpp"
+#include "tests.hpp"
 
 struct BenchmarkOutputs {
     std::vector<std::string> csv_paths;

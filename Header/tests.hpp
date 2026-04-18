@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include "ISorter.hpp"
+#include "isorter.hpp"
 
 struct TestSettings {
     std::vector<std::size_t> sizes {10'000, 50'000, 100'000, 500'000, 1'000'000};
