@@ -9,30 +9,21 @@ namespace sorting {
 namespace quicksort_detail {
 
 template <typename T>
-bool comes_before(const T& left, const T& right, SortOrder order) {
-    if (order == SortOrder::Descending) {
-        return left > right;
-    }
-
-    return left < right;
-}
-
-template <typename T>
 std::size_t median_of_three(std::vector<T>& data,
                             std::size_t left,
                             std::size_t right,
                             SortOrder order) {
     const std::size_t middle = left + (right - left) / 2;
 
-    if (comes_before(data[middle], data[left], order)) {
+    if (compare_values(data[middle], data[left], order)) {
         std::swap(data[left], data[middle]);
     }
 
-    if (comes_before(data[right], data[left], order)) {
+    if (compare_values(data[right], data[left], order)) {
         std::swap(data[left], data[right]);
     }
 
-    if (comes_before(data[right], data[middle], order)) {
+    if (compare_values(data[right], data[middle], order)) {
         std::swap(data[middle], data[right]);
     }
 
@@ -51,7 +42,7 @@ std::size_t partition(std::vector<T>& data,
     std::size_t smaller_index = left;
 
     for (std::size_t current = left; current < right; ++current) {
-        if (!comes_before(pivot_value, data[current], order)) {
+        if (!compare_values(pivot_value, data[current], order)) {
             std::swap(data[smaller_index], data[current]);
             ++smaller_index;
         }

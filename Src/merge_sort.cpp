@@ -8,15 +8,6 @@ namespace sorting {
 namespace detail {
 
 template <typename T>
-bool comes_before(const T& left, const T& right, SortOrder order) {
-    if (order == SortOrder::Descending) {
-        return left > right;
-    }
-
-    return left < right;
-}
-
-template <typename T>
 void merge_ranges(std::vector<T>& data,
                   std::vector<T>& buffer,
                   std::size_t left,
@@ -29,7 +20,7 @@ void merge_ranges(std::vector<T>& data,
 
     // Merge two sorted halves into a temporary buffer.
     while (left_index <= middle && right_index <= right) {
-        if (comes_before(data[right_index], data[left_index], order)) {
+        if (compare_values(data[right_index], data[left_index], order)) {
             buffer[buffer_index++] = data[right_index++];
         } else {
             buffer[buffer_index++] = data[left_index++];

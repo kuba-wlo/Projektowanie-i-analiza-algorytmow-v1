@@ -1,6 +1,7 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <cstddef>
 #include <functional>
 #include <vector>
 
@@ -13,6 +14,33 @@ enum class SortOrder {
 
 template <typename T>
 using Comparator = std::function<bool(const T&, const T&)>;
+
+template <typename T>
+bool compare_values(const T& left, const T& right, SortOrder order) {
+    if (order == SortOrder::Descending) {
+        return left > right;
+    }
+
+    return left < right;
+}
+
+template <typename T>
+bool is_sorted(const std::vector<T>& data, SortOrder order = SortOrder::Ascending) {
+    for (std::size_t index = 1; index < data.size(); ++index) {
+        if (compare_values(data[index], data[index - 1], order)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+std::vector<int> generate_random_data(std::size_t size,
+                                      int min_value = 0,
+                                      int max_value = 1000000);
+std::vector<int> generate_partially_sorted_data(std::size_t size,
+                                                double sorted_fraction = 0.5);
+std::vector<int> generate_reverse_sorted_data(std::size_t size);
 
 }  // namespace sorting
 

@@ -7,7 +7,7 @@
 #include "../Header/utils.hpp"
 
 int main() {
-    std::vector<int> sample = {7, 2, 9, 1, 5, 3};
+    std::vector<int> sample = sorting::generate_partially_sorted_data(10, 0.5);
 
     sorting::intro_sort(sample, sorting::SortOrder::Ascending);
 
@@ -16,6 +16,9 @@ int main() {
         std::cout << value << ' ';
     }
     std::cout << '\n';
+    std::cout << "Sorted correctly: "
+              << (sorting::is_sorted(sample, sorting::SortOrder::Ascending) ? "yes" : "no")
+              << '\n';
 
     return 0;
 }
