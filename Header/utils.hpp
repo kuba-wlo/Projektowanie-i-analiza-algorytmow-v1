@@ -1,5 +1,4 @@
-#ifndef UTILS_HPP
-#define UTILS_HPP
+#pragma once
 
 #include <chrono>
 #include <cstddef>
@@ -55,5 +54,3 @@ double measure_sort_time(std::vector<T>& data, SortFunction sort_function) {
 }
 
 }  // namespace sorting
-
-#endif
