@@ -82,9 +82,9 @@ bool is_sorted(const int* first, const int* last, bool ascending) {
     return true;
 }
 
-double measure_sort_ms(ISorter& sorter, int* first, int* last, bool ascending) {
+double measure_sort_ms(ISorter& sorter, std::vector<int>& data, bool ascending) {
     const auto start_time = std::chrono::high_resolution_clock::now();
-    sorter.sort(first, last, ascending);
+    sorter.sort(data, ascending);
     const auto end_time = std::chrono::high_resolution_clock::now();
 
     return std::chrono::duration<double, std::milli>(end_time - start_time).count();
@@ -168,11 +168,7 @@ void run_all(const TestSettings& cfg,
                 for (ISorter* sorter : sorters) {
                     work = base;
 
-                    const double elapsed_ms = measure_sort_ms(
-                        *sorter,
-                        work.data(),
-                        work.data() + static_cast<std::ptrdiff_t>(work.size()),
-                        cfg.ascending);
+                    const double elapsed_ms = measure_sort_ms(*sorter, work, cfg.ascending);
                     const bool valid =
                         is_sorted(work.data(),
                                   work.data() + static_cast<std::ptrdiff_t>(work.size()),

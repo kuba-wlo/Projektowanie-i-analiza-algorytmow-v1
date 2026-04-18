@@ -1,7 +1,5 @@
-#include <algorithm>
 #include <filesystem>
 #include <fstream>
-#include <iterator>
 #include <locale>
 #include <memory>
 #include <stdexcept>
@@ -21,12 +19,10 @@ public:
         return "merge_sort";
     }
 
-    void sort(int* first, int* last, bool ascending) override {
-        std::vector<int> data(first, last);
+    void sort(std::vector<int>& data, bool ascending) override {
         sorting::merge_sort(
             data,
             ascending ? sorting::SortOrder::Ascending : sorting::SortOrder::Descending);
-        std::copy(data.begin(), data.end(), first);
     }
 };
 
@@ -36,12 +32,10 @@ public:
         return "quicksort";
     }
 
-    void sort(int* first, int* last, bool ascending) override {
-        std::vector<int> data(first, last);
+    void sort(std::vector<int>& data, bool ascending) override {
         sorting::quick_sort(
             data,
             ascending ? sorting::SortOrder::Ascending : sorting::SortOrder::Descending);
-        std::copy(data.begin(), data.end(), first);
     }
 };
 
@@ -51,12 +45,10 @@ public:
         return "introsort";
     }
 
-    void sort(int* first, int* last, bool ascending) override {
-        std::vector<int> data(first, last);
+    void sort(std::vector<int>& data, bool ascending) override {
         sorting::intro_sort(
             data,
             ascending ? sorting::SortOrder::Ascending : sorting::SortOrder::Descending);
-        std::copy(data.begin(), data.end(), first);
     }
 };
 
@@ -95,7 +87,6 @@ int main() {
     std::vector<ISorter*> sorters = {&merge_sort, &quicksort, &introsort};
 
     TestSettings settings;
-    settings.repetitions_per_case = 10;
     settings.base_seed = 20260418u;
     settings.csv_path = "Results/results.csv";
 
