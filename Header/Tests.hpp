@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <functional>
 #include <map>
 #include <memory>
 #include <ostream>
@@ -33,6 +34,8 @@ struct CaseSpec {
     const char* name;
 };
 
+using StatusCallback = std::function<void(const std::string&)>;
+
 const std::vector<CaseSpec>& all_cases();
 
 void make_case(int* first, int* last, CaseKind kind, unsigned int seed);
@@ -53,4 +56,5 @@ std::vector<std::string> csv_output_paths(const TestSettings& cfg,
 void run_all(const TestSettings& cfg,
              const std::vector<ISorter*>& sorters,
              const std::map<std::string, std::ostream*>& csv_out = {},
-             bool print_human = true);
+             bool print_human = true,
+             StatusCallback status_callback = {});

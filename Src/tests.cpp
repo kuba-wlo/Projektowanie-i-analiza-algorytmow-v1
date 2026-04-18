@@ -136,9 +136,13 @@ std::vector<std::string> csv_output_paths(const TestSettings& cfg,
 void run_all(const TestSettings& cfg,
              const std::vector<ISorter*>& sorters,
              const std::map<std::string, std::ostream*>& csv_out,
-             bool print_human) {
+             bool print_human,
+             StatusCallback status_callback) {
     if (print_human) {
         std::cout << "\nStarting benchmark session\n";
+    }
+    if (status_callback) {
+        status_callback("Starting benchmark session.");
     }
 
     std::cout << std::fixed << std::setprecision(4);
@@ -148,6 +152,9 @@ void run_all(const TestSettings& cfg,
             std::cout << "  [" << size << "] ";
             std::cout.flush();
         }
+        if (status_callback) {
+            status_callback("Running benchmarks for size " + std::to_string(size) + '.');
+        }
 
         std::vector<int> base(size);
         std::vector<int> work(size);
@@ -156,6 +163,9 @@ void run_all(const TestSettings& cfg,
             if (print_human) {
                 std::cout << '.';
                 std::cout.flush();
+            }
+            if (status_callback) {
+                status_callback("  Case: " + std::string(spec.name));
             }
 
             std::map<std::string, double> accumulated_times;
@@ -220,5 +230,12 @@ void run_all(const TestSettings& cfg,
         if (print_human) {
             std::cout << " OK\n";
         }
+        if (status_callback) {
+            status_callback("Finished size " + std::to_string(size) + '.');
+        }
+    }
+
+    if (status_callback) {
+        status_callback("Benchmark session completed.");
     }
 }
