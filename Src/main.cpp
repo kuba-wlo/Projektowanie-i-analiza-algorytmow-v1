@@ -9,9 +9,9 @@
 int main() {
     std::vector<int> sample = {7, 2, 9, 1, 5, 3};
 
-    sorting::merge_sort(sample, sorting::SortOrder::Ascending);
+    sorting::quick_sort(sample, sorting::SortOrder::Descending);
 
-    std::cout << "Merge sort result: ";
+    std::cout << "Quicksort result: ";
     for (const int value : sample) {
         std::cout << value << ' ';
     }
