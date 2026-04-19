@@ -1,145 +1,145 @@
-# Projekt 1 - Analiza i porownanie algorytmow sortowania
+# Projekt 1 – Analiza i porównanie algorytmów sortowania
 
 ## Opis projektu
 
-Projekt zawiera implementacje i benchmark trzech algorytmow sortowania:
+Projekt zawiera implementacje i benchmark trzech algorytmów sortowania:
 
 - `merge_sort`
 - `quick_sort`
 - `intro_sort`
 
-Algorytmy zostaly zaimplementowane jako funkcje szablonowe operujace na `std::vector<T>`.
+Algorytmy zostały zaimplementowane jako funkcje szablonowe operujące na `std::vector<T>`.
 Warstwa benchmarku uruchamia je na danych typu `int`, mierzy czas wykonania, sprawdza
-poprawnosc wyniku i zapisuje rezultaty do osobnych plikow CSV.
+poprawność wyniku i zapisuje rezultaty do osobnych plików CSV.
 
-Program jest uruchamiany z terminala przez `Src/main.cpp` i udostepnia proste menu tekstowe,
-ktore pozwala:
+Program jest uruchamiany z terminala przez `Src/main.cpp` i udostępnia proste menu tekstowe,
+które pozwala:
 
-- uruchomic pelny benchmark,
-- zmienic ustawienia testow,
-- podejrzec aktualna konfiguracje,
-- wyswietlic skrot wymagan projektu.
+- uruchomić pełny benchmark,
+- zmienić ustawienia testów,
+- podejrzeć aktualną konfigurację,
+- wyświetlić skrót wymagań projektu.
 
 ## Cel projektu
 
 Celem projektu jest:
 
-- implementacja trzech algorytmow wymaganych w projekcie,
-- porownanie ich efektywnosci czasowej,
-- sprawdzenie zachowania algorytmow dla roznych typow danych wejsciowych,
-- przygotowanie wynikow do dalszej analizy w arkuszu kalkulacyjnym lub sprawozdaniu.
+- implementacja trzech algorytmów wymaganych w projekcie,
+- porównanie ich efektywności czasowej,
+- sprawdzenie zachowania algorytmów dla różnych typów danych wejściowych,
+- przygotowanie wyników do dalszej analizy w arkuszu kalkulacyjnym lub sprawozdaniu.
 
 ## Zaimplementowane algorytmy
 
 ### Merge Sort
 
 Sortowanie przez scalanie z dodatkowym buforem pomocniczym. Algorytm rekurencyjnie dzieli
-tablice na dwie polowy, a nastepnie scala posortowane fragmenty.
+tablicę na dwie połowy, a następnie scala posortowane fragmenty.
 
 ### Quick Sort
 
-Sortowanie szybkie z wyborem pivota metoda `median of three`. Dla malych zakresow algorytm
-przelacza sie na insertion sort, a rekurencja jest prowadzona najpierw po mniejszej partycji,
+Sortowanie szybkie z wyborem pivota metodą `median of three`. Dla małych zakresów algorytm
+przełącza się na insertion sort, a rekurencja jest prowadzona najpierw po mniejszej partycji,
 co zmniejsza narzut i ogranicza wzrost stosu.
 
 ### Intro Sort
 
-Algorytm hybrydowy. Dziala jak quicksort, ale pilnuje limitu glebokosci `2 * floor(log2(n))`.
-Po wyczerpaniu limitu przelacza sie na heap sort dla biezacego zakresu. Dla malych zakresow
-korzysta rowniez z insertion sorta.
+Algorytm hybrydowy. Działa jak quicksort, ale pilnuje limitu głębokości `2 * floor(log2(n))`.
+Po wyczerpaniu limitu przełącza się na heap sort dla bieżącego zakresu. Dla małych zakresów
+korzysta również z insertion sorta.
 
 ## Struktura projektu
 
-Projekt jest podzielony na trzy glowne katalogi:
+Projekt jest podzielony na trzy główne katalogi:
 
-- `Header/` - pliki naglowkowe
-- `Src/` - pliki zrodlowe
-- `Results/` - pliki wynikowe CSV
+- `Header/` – pliki nagłówkowe
+- `Src/` – pliki źródłowe
+- `Results/` – pliki wynikowe CSV
 
-### Najwazniejsze pliki w `Header/`
+### Najważniejsze pliki w `Header/`
 
-- `benchmark_session.hpp` - deklaracja uruchomienia pelnej sesji benchmarkowej
-- `isorter.hpp` - wspolny interfejs dla sorterow uzywanych przez benchmark
-- `tests.hpp` - ustawienia testow, przypadki testowe i deklaracje funkcji pomiarowych
-- `merge_sort.hpp` - pelna implementacja merge sorta
-- `quicksort.hpp` - pelna implementacja quicksorta
-- `introsort.hpp` - pelna implementacja introsorta
-- `utils.hpp` - wspolne typy i funkcje pomocnicze, np. `SortOrder`
+- `benchmark_session.hpp` – deklaracja uruchomienia pełnej sesji benchmarkowej
+- `isorter.hpp` – wspólny interfejs dla sorterów używanych przez benchmark
+- `tests.hpp` – ustawienia testów, przypadki testowe i deklaracje funkcji pomiarowych
+- `merge_sort.hpp` – pełna implementacja merge sorta
+- `quicksort.hpp` – pełna implementacja quicksorta
+- `introsort.hpp` – pełna implementacja introsorta
+- `utils.hpp` – wspólne typy i funkcje pomocnicze, np. `SortOrder`
 
-### Najwazniejsze pliki w `Src/`
+### Najważniejsze pliki w `Src/`
 
-- `main.cpp` - menu tekstowe i obsluga uruchamiania programu
-- `benchmark_session.cpp` - skladanie listy algorytmow i przygotowanie plikow wynikowych
-- `tests.cpp` - glowny silnik benchmarku
-- `utils.cpp` - dodatkowe funkcje pomocnicze do generowania danych
+- `main.cpp` – menu tekstowe i obsługa uruchamiania programu
+- `benchmark_session.cpp` – składanie listy algorytmów i przygotowanie plików wynikowych
+- `tests.cpp` – główny silnik benchmarku
+- `utils.cpp` – dodatkowe funkcje pomocnicze do generowania danych
 
-Uwaga: implementacje algorytmow szablonowych znajduja sie bezposrednio w plikach `.hpp`.
-Projekt nie uzywa juz osobnych plikow `merge_sort.cpp`, `quicksort.cpp` ani `introsort.cpp`.
+Uwaga: implementacje algorytmów szablonowych znajdują się bezpośrednio w plikach `.hpp`.
+Projekt nie używa już osobnych plików `merge_sort.cpp`, `quicksort.cpp` ani `introsort.cpp`.
 
-## Jak dziala program
+## Jak działa program
 
-### 1. Warstwa wejscia
+### 1. Warstwa wejścia
 
-Po uruchomieniu programu uzytkownik dostaje proste menu tekstowe. Z tego poziomu mozna:
+Po uruchomieniu programu użytkownik dostaje proste menu tekstowe. Z tego poziomu można:
 
-- wystartowac benchmark,
-- edytowac ustawienia,
-- wypisac aktualna konfiguracje,
-- sprawdzic skrot wymagan projektu.
+- wystartować benchmark,
+- edytować ustawienia,
+- wypisać aktualną konfigurację,
+- sprawdzić skrót wymagań projektu.
 
 ### 2. Warstwa benchmarku
 
 Funkcja `run_default_benchmark(...)` tworzy trzy adaptery zgodne z interfejsem `ISorter`
-i przekazuje je do wspolnego silnika testowego.
+i przekazuje je do wspólnego silnika testowego.
 
 Benchmark:
 
 - generuje dane testowe,
-- uruchamia kazdy algorytm na identycznym wejsciu,
+- uruchamia każdy algorytm na identycznym wejściu,
 - mierzy czas wykonania,
-- sprawdza poprawnosc sortowania,
-- zapisuje kazdy pomiar do odpowiedniego pliku CSV,
-- dopisuje wiersz sredniej dla kazdego przypadku.
+- sprawdza poprawność sortowania,
+- zapisuje każdy pomiar do odpowiedniego pliku CSV,
+- dopisuje wiersz średniej dla każdego przypadku.
 
-### 3. Warstwa wynikow
+### 3. Warstwa wyników
 
-Kazdy algorytm zapisuje swoje wyniki do osobnego pliku, np.:
+Każdy algorytm zapisuje swoje wyniki do osobnego pliku, np.:
 
 - `Results/results-merge_sort.csv`
 - `Results/results-quicksort.csv`
 - `Results/results-introsort.csv`
 
-Sciezka bazowa jest pobierana z `TestSettings::csv_path`, a nazwy plikow sa budowane
+Ścieżka bazowa jest pobierana z `TestSettings::csv_path`, a nazwy plików są budowane
 automatycznie przez dopisanie nazwy sortera do nazwy bazowej.
 
 ## Przypadki testowe
 
-Program testuje algorytmy dla nastepujacych rodzajow danych:
+Program testuje algorytmy dla następujących rodzajów danych:
 
-- `random` - wszystkie elementy losowe,
+- `random` – wszystkie elementy losowe,
 - `prefix_25%`
 - `prefix_50%`
 - `prefix_75%`
 - `prefix_95%`
 - `prefix_99%`
 - `prefix_99.7%`
-- `reversed` - dane w odwrotnej kolejnosci.
+- `reversed` – dane w odwrotnej kolejności.
 
-Przypadki `prefix_x%` oznaczaja, ze poczatkowy fragment tablicy pozostaje uporzadkowany,
-a tasowana jest tylko koncowka danych.
+Przypadki `prefix_x%` oznaczają, że początkowy fragment tablicy pozostaje uporządkowany,
+a tasowana jest tylko końcówka danych.
 
-## Domyslna konfiguracja
+## Domyślna konfiguracja
 
-Domyslne ustawienia odpowiadaja wymaganiom projektu:
+Domyślne ustawienia odpowiadają wymaganiom projektu:
 
 - rozmiary tablic: `10 000`, `50 000`, `100 000`, `500 000`, `1 000 000`
-- liczba powtorzen: `100`
-- domyslny kierunek sortowania: rosnaco
-- domyslna baza plikow wynikowych: `Results/results.csv`
+- liczba powtórzeń: `100`
+- domyślny kierunek sortowania: rosnąco
+- domyślna baza plików wynikowych: `Results/results.csv`
 
-W `main.cpp` domyslny seed dla sesji benchmarkowej jest ustawiony na `20260418`.
+W `main.cpp` domyślny seed dla sesji benchmarkowej jest ustawiony na `20260418`.
 
-## Format wynikow CSV
+## Format wyników CSV
 
 Program zapisuje dane w formacie:
 
@@ -151,13 +151,13 @@ average;merge_sort;10000;random;-1;1.456789;1
 
 Znaczenie kolumn:
 
-- `row_type` - `trial` dla pojedynczego pomiaru albo `average` dla sredniej
-- `algorithm` - nazwa algorytmu
-- `size` - rozmiar tablicy
-- `case_name` - rodzaj danych testowych
-- `run_number` - numer powtorzenia
-- `time_ms` - czas wykonania w milisekundach
-- `sorted_correctly` - poprawnosc wyniku (`1` = poprawny, `0` = blad)
+- `row_type` – `trial` dla pojedynczego pomiaru albo `average` dla średniej
+- `algorithm` – nazwa algorytmu
+- `size` – rozmiar tablicy
+- `case_name` – rodzaj danych testowych
+- `run_number` – numer powtórzenia
+- `time_ms` – czas wykonania w milisekundach
+- `sorted_correctly` – poprawność wyniku (`1` = poprawny, `0` = błąd)
 
 ## Wykorzystane technologie
 
@@ -168,19 +168,19 @@ Znaczenie kolumn:
 - `std::shuffle`
 - `std::make_heap` i `std::sort_heap`
 - programowanie obiektowe w warstwie benchmarku przez `ISorter`
-- szablony C++ w implementacjach algorytmow
+- szablony C++ w implementacjach algorytmów
 
 ## Kompilacja
 
 ### PowerShell
 
-W katalogu glownym projektu:
+W katalogu głównym projektu:
 
 ```powershell
 g++ -std=c++17 -O2 Src\main.cpp Src\benchmark_session.cpp Src\tests.cpp Src\utils.cpp -o projekt.exe
 ```
 
-Jesli `g++` nie jest dodany do `PATH`, mozna uzyc pelnej sciezki, np.:
+Jeśli `g++` nie jest dodany do `PATH`, można użyć pełnej ścieżki, np.:
 
 ```powershell
 & "C:\msys64\ucrt64\bin\g++.exe" -std=c++17 -O2 Src\main.cpp Src\benchmark_session.cpp Src\tests.cpp Src\utils.cpp -o projekt.exe
@@ -205,29 +205,29 @@ Po kompilacji:
 
 Program uruchamia menu tekstowe w terminalu.
 
-## Co mozna ustawic z poziomu programu
+## Co można ustawić z poziomu programu
 
-Z poziomu menu mozna zmienic:
+Z poziomu menu można zmienić:
 
-- liczbe powtorzen,
+- liczbę powtórzeń,
 - seed generatora,
-- bazowa sciezke plikow CSV,
+- bazową ścieżkę plików CSV,
 - kierunek sortowania.
 
-Projekt nie uzywa parsera argumentow wiersza polecen, GUI, `ncurses`, CMake ani zewnetrznych
-skryptow do wykresow. To swiadomie prosty wariant: kompilacja, uruchomienie, benchmark, pliki CSV.
+Projekt nie używa parsera argumentów wiersza poleceń, GUI, `ncurses`, CMake ani zewnętrznych
+skryptów do wykresów. To świadomie prosty wariant: kompilacja, uruchomienie, benchmark, pliki CSV.
 
-## Najwazniejsze cechy projektu
+## Najważniejsze cechy projektu
 
 - trzy algorytmy wymagane w projekcie,
-- wspolna warstwa benchmarku dla wszystkich sorterow,
-- osobne pliki wynikowe dla kazdego algorytmu,
-- walidacja poprawnosci po kazdym sortowaniu,
-- mozliwosc sortowania rosnaco i malejaco,
+- wspólna warstwa benchmarku dla wszystkich sorterów,
+- osobne pliki wynikowe dla każdego algorytmu,
+- walidacja poprawności po każdym sortowaniu,
+- możliwość sortowania rosnąco i malejąco,
 - wyniki gotowe do dalszej analizy w sprawozdaniu.
 
 ## Podsumowanie
 
-Projekt stanowi kompletny benchmark algorytmow `MergeSort`, `QuickSort` i `IntroSort`
-dla danych typu `int`. Laczy implementacje algorytmow, testowanie poprawnosci i pomiar
-wydajnosci w jednej prostej strukturze projektu, zgodnej z zalozeniami zadania.
+Projekt stanowi kompletny benchmark algorytmów `MergeSort`, `QuickSort` i `IntroSort`
+dla danych typu `int`. Łączy implementacje algorytmów, testowanie poprawności i pomiar
+wydajności w jednej prostej strukturze projektu, zgodnej z założeniami zadania.
