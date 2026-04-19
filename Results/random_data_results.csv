@@ -1,0 +1,151 @@
+algorithm,data_type,size,run_number,time_ms,sorted_correctly
+Merge sort,Random data,10000,1,5.372,yes
+Merge sort,Random data,10000,2,5.243,yes
+Merge sort,Random data,10000,3,8.134,yes
+Merge sort,Random data,10000,4,6.933,yes
+Merge sort,Random data,10000,5,5.270,yes
+Merge sort,Random data,10000,6,5.549,yes
+Merge sort,Random data,10000,7,6.657,yes
+Merge sort,Random data,10000,8,7.276,yes
+Merge sort,Random data,10000,9,8.643,yes
+Merge sort,Random data,10000,10,8.367,yes
+Merge sort,Random data,50000,1,46.757,yes
+Merge sort,Random data,50000,2,42.146,yes
+Merge sort,Random data,50000,3,45.605,yes
+Merge sort,Random data,50000,4,32.937,yes
+Merge sort,Random data,50000,5,37.251,yes
+Merge sort,Random data,50000,6,32.745,yes
+Merge sort,Random data,50000,7,33.868,yes
+Merge sort,Random data,50000,8,32.984,yes
+Merge sort,Random data,50000,9,39.604,yes
+Merge sort,Random data,50000,10,38.127,yes
+Merge sort,Random data,100000,1,81.178,yes
+Merge sort,Random data,100000,2,76.284,yes
+Merge sort,Random data,100000,3,70.978,yes
+Merge sort,Random data,100000,4,69.217,yes
+Merge sort,Random data,100000,5,70.872,yes
+Merge sort,Random data,100000,6,85.295,yes
+Merge sort,Random data,100000,7,74.461,yes
+Merge sort,Random data,100000,8,86.915,yes
+Merge sort,Random data,100000,9,85.181,yes
+Merge sort,Random data,100000,10,82.620,yes
+Merge sort,Random data,500000,1,438.230,yes
+Merge sort,Random data,500000,2,444.169,yes
+Merge sort,Random data,500000,3,473.387,yes
+Merge sort,Random data,500000,4,408.877,yes
+Merge sort,Random data,500000,5,436.465,yes
+Merge sort,Random data,500000,6,418.584,yes
+Merge sort,Random data,500000,7,428.630,yes
+Merge sort,Random data,500000,8,414.764,yes
+Merge sort,Random data,500000,9,440.806,yes
+Merge sort,Random data,500000,10,412.133,yes
+Merge sort,Random data,1000000,1,888.873,yes
+Merge sort,Random data,1000000,2,922.731,yes
+Merge sort,Random data,1000000,3,936.743,yes
+Merge sort,Random data,1000000,4,897.086,yes
+Merge sort,Random data,1000000,5,923.351,yes
+Merge sort,Random data,1000000,6,947.141,yes
+Merge sort,Random data,1000000,7,915.017,yes
+Merge sort,Random data,1000000,8,908.642,yes
+Merge sort,Random data,1000000,9,924.505,yes
+Merge sort,Random data,1000000,10,917.765,yes
+Quicksort,Random data,10000,1,3.800,yes
+Quicksort,Random data,10000,2,3.905,yes
+Quicksort,Random data,10000,3,3.873,yes
+Quicksort,Random data,10000,4,4.057,yes
+Quicksort,Random data,10000,5,4.073,yes
+Quicksort,Random data,10000,6,4.063,yes
+Quicksort,Random data,10000,7,4.034,yes
+Quicksort,Random data,10000,8,3.787,yes
+Quicksort,Random data,10000,9,3.675,yes
+Quicksort,Random data,10000,10,3.375,yes
+Quicksort,Random data,50000,1,19.341,yes
+Quicksort,Random data,50000,2,24.086,yes
+Quicksort,Random data,50000,3,25.405,yes
+Quicksort,Random data,50000,4,20.882,yes
+Quicksort,Random data,50000,5,20.408,yes
+Quicksort,Random data,50000,6,19.091,yes
+Quicksort,Random data,50000,7,21.622,yes
+Quicksort,Random data,50000,8,20.069,yes
+Quicksort,Random data,50000,9,21.474,yes
+Quicksort,Random data,50000,10,22.287,yes
+Quicksort,Random data,100000,1,45.187,yes
+Quicksort,Random data,100000,2,47.114,yes
+Quicksort,Random data,100000,3,45.077,yes
+Quicksort,Random data,100000,4,42.580,yes
+Quicksort,Random data,100000,5,48.256,yes
+Quicksort,Random data,100000,6,46.759,yes
+Quicksort,Random data,100000,7,44.470,yes
+Quicksort,Random data,100000,8,45.830,yes
+Quicksort,Random data,100000,9,44.845,yes
+Quicksort,Random data,100000,10,41.743,yes
+Quicksort,Random data,500000,1,273.923,yes
+Quicksort,Random data,500000,2,265.946,yes
+Quicksort,Random data,500000,3,273.644,yes
+Quicksort,Random data,500000,4,289.294,yes
+Quicksort,Random data,500000,5,301.158,yes
+Quicksort,Random data,500000,6,302.058,yes
+Quicksort,Random data,500000,7,274.550,yes
+Quicksort,Random data,500000,8,304.167,yes
+Quicksort,Random data,500000,9,283.455,yes
+Quicksort,Random data,500000,10,301.098,yes
+Quicksort,Random data,1000000,1,607.678,yes
+Quicksort,Random data,1000000,2,562.051,yes
+Quicksort,Random data,1000000,3,516.079,yes
+Quicksort,Random data,1000000,4,564.632,yes
+Quicksort,Random data,1000000,5,572.668,yes
+Quicksort,Random data,1000000,6,570.480,yes
+Quicksort,Random data,1000000,7,553.870,yes
+Quicksort,Random data,1000000,8,563.192,yes
+Quicksort,Random data,1000000,9,559.138,yes
+Quicksort,Random data,1000000,10,577.250,yes
+Introsort,Random data,10000,1,7.426,yes
+Introsort,Random data,10000,2,10.177,yes
+Introsort,Random data,10000,3,8.120,yes
+Introsort,Random data,10000,4,6.685,yes
+Introsort,Random data,10000,5,7.402,yes
+Introsort,Random data,10000,6,6.925,yes
+Introsort,Random data,10000,7,6.721,yes
+Introsort,Random data,10000,8,7.664,yes
+Introsort,Random data,10000,9,7.546,yes
+Introsort,Random data,10000,10,7.281,yes
+Introsort,Random data,50000,1,41.346,yes
+Introsort,Random data,50000,2,44.646,yes
+Introsort,Random data,50000,3,39.619,yes
+Introsort,Random data,50000,4,43.657,yes
+Introsort,Random data,50000,5,36.044,yes
+Introsort,Random data,50000,6,43.180,yes
+Introsort,Random data,50000,7,42.173,yes
+Introsort,Random data,50000,8,39.408,yes
+Introsort,Random data,50000,9,58.517,yes
+Introsort,Random data,50000,10,44.268,yes
+Introsort,Random data,100000,1,83.551,yes
+Introsort,Random data,100000,2,90.655,yes
+Introsort,Random data,100000,3,86.555,yes
+Introsort,Random data,100000,4,88.010,yes
+Introsort,Random data,100000,5,88.578,yes
+Introsort,Random data,100000,6,83.378,yes
+Introsort,Random data,100000,7,85.511,yes
+Introsort,Random data,100000,8,90.038,yes
+Introsort,Random data,100000,9,85.119,yes
+Introsort,Random data,100000,10,89.694,yes
+Introsort,Random data,500000,1,519.565,yes
+Introsort,Random data,500000,2,504.007,yes
+Introsort,Random data,500000,3,508.109,yes
+Introsort,Random data,500000,4,508.492,yes
+Introsort,Random data,500000,5,501.120,yes
+Introsort,Random data,500000,6,511.708,yes
+Introsort,Random data,500000,7,527.112,yes
+Introsort,Random data,500000,8,521.568,yes
+Introsort,Random data,500000,9,534.715,yes
+Introsort,Random data,500000,10,521.035,yes
+Introsort,Random data,1000000,1,1129.190,yes
+Introsort,Random data,1000000,2,1124.436,yes
+Introsort,Random data,1000000,3,1114.556,yes
+Introsort,Random data,1000000,4,1098.111,yes
+Introsort,Random data,1000000,5,1075.001,yes
+Introsort,Random data,1000000,6,1095.357,yes
+Introsort,Random data,1000000,7,1088.515,yes
+Introsort,Random data,1000000,8,1090.436,yes
+Introsort,Random data,1000000,9,1094.786,yes
+Introsort,Random data,1000000,10,1072.433,yes
