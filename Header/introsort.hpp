@@ -3,7 +3,7 @@
 // Introsort (std::sort-style): hybryda quicksort + heap sort + insertion sort.
 // Limit głębokości 2 * floor(log2 n) ogranicza najgorszy przypadek quicksorta; po jego
 // wyczerpaniu sortujemy heap sortem. Krótkie fragmenty domykamy insertion sortem (taniej
-// niż rekurencja). Pętla z eliminacją ogona rekurencji ogranicza wzrost stosu jak w typowym quicksortcie.
+// niż rekurencja). Pętla z eliminacją ogona rekurencji ogranicza wzrost stosu (ten sam schemat co w `quick_sort`).
 
 #include <algorithm>
 #include <cstddef>
