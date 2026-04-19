@@ -214,8 +214,6 @@ Z poziomu menu można zmienić:
 - bazową ścieżkę plików CSV,
 - kierunek sortowania.
 
-Projekt nie używa parsera argumentów wiersza poleceń, GUI, `ncurses`, CMake ani zewnętrznych
-skryptów do wykresów. To świadomie prosty wariant: kompilacja, uruchomienie, benchmark, pliki CSV.
 
 ## Najważniejsze cechy projektu
 
