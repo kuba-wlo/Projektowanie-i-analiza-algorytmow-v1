@@ -51,7 +51,6 @@ struct RunArtifacts {
 };
 
 double measure_sort_ms(ISorter& sorter, std::vector<int>& data, bool ascending);
-RunArtifacts prepare_outputs(const TestSettings& cfg, bool print_csv);
 
 std::vector<std::string> csv_output_paths(const TestSettings& cfg,
                                           const std::vector<ISorter*>& sorters);

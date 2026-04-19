@@ -3,10 +3,8 @@
 #include <algorithm>
 #include <chrono>
 #include <filesystem>
-#include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <locale>
 #include <numeric>
 #include <random>
 #include <stdexcept>
@@ -107,32 +105,6 @@ double measure_sort_ms(ISorter& sorter, std::vector<int>& data, bool ascending) 
     const auto end_time = std::chrono::high_resolution_clock::now();
 
     return std::chrono::duration<double, std::milli>(end_time - start_time).count();
-}
-
-RunArtifacts prepare_outputs(const TestSettings& cfg, bool print_csv) {
-    RunArtifacts artifacts;
-
-    if (!print_csv) {
-        return artifacts;
-    }
-
-    const std::filesystem::path output_path(cfg.csv_path);
-    if (output_path.has_parent_path()) {
-        std::filesystem::create_directories(output_path.parent_path());
-    }
-
-    auto stream = std::make_unique<std::ofstream>(cfg.csv_path);
-    if (!stream->is_open()) {
-        throw std::runtime_error("Could not open CSV output file.");
-    }
-
-    stream->imbue(std::locale::classic());
-    (*stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
-
-    artifacts.csv_streams["all"] = stream.get();
-    artifacts.owned_csv_streams["all"] = std::move(stream);
-
-    return artifacts;
 }
 
 std::vector<std::string> csv_output_paths(const TestSettings& cfg,
