@@ -1,5 +1,8 @@
 #pragma once
 
+// Quicksort z medianą z trzech, partycją Lomuto, progiem insertion sort i „ogonem”
+// w pętli (najpierw rekurencja w mniejszej połowie) — typowy, wydajny wariant in-place.
+
 #include <cstddef>
 #include <utility>
 #include <vector>
@@ -17,6 +20,7 @@ void insertion_sort_range(std::vector<T>& data,
                           std::size_t left,
                           std::size_t right,
                           SortOrder order) {
+    // Insertion sort na krótkich zakresach — mniej wywołań rekurencyjnych i lepsza stała.
     for (std::size_t index = left + 1; index <= right; ++index) {
         T value = std::move(data[index]);
         std::size_t insert_at = index;
@@ -35,6 +39,7 @@ std::size_t median_of_three(std::vector<T>& data,
                             std::size_t left,
                             std::size_t right,
                             SortOrder order) {
+    // Ustawia medianę z (left, mid, right) na data[middle] przez zamiany — lepszy pivot niż losowy kraniec.
     const std::size_t middle = left + (right - left) / 2;
 
     if (compare_values(data[middle], data[left], order)) {
@@ -57,6 +62,7 @@ std::size_t partition(std::vector<T>& data,
                       std::size_t left,
                       std::size_t right,
                       SortOrder order) {
+    // Lomuto: elementy nie większe od pivotu (wg porządku) lądują na lewo od smaller_index.
     const std::size_t pivot_index = median_of_three(data, left, right, order);
     const T pivot_value = data[pivot_index];
     std::swap(data[pivot_index], data[right]);
@@ -89,7 +95,7 @@ void quick_sort_recursive(std::vector<T>& data,
         const std::size_t left_size = pivot_index > left ? pivot_index - left : 0;
         const std::size_t right_size = right > pivot_index ? right - pivot_index : 0;
 
-        // Recurse into the smaller side first to keep stack growth bounded.
+        // Rekurencja w mniejszej partycji najpierw — głębokość stosu O(log n) w najgorszym razie.
         if (left_size < right_size) {
             if (pivot_index > left) {
                 quick_sort_recursive(data, left, pivot_index - 1, order);
@@ -113,6 +119,7 @@ void quick_sort_recursive(std::vector<T>& data,
 
 template <typename T>
 void quick_sort(std::vector<T>& data, SortOrder order = SortOrder::Ascending) {
+    // Sortuje cały wektor; brak osobnej alokacji poza stosem wywołań (poza progiem insertion).
     if (data.size() < 2) {
         return;
     }

@@ -1,5 +1,7 @@
 #include "../Header/utils.hpp"
 
+// Generatory danych do eksperymentów / innych narzędzi (benchmark w tests.cpp ma własne make_case).
+
 #include <algorithm>
 #include <numeric>
 #include <random>
@@ -19,6 +21,7 @@ std::mt19937& random_engine() {
 }  // namespace
 
 std::vector<int> generate_random_data(std::size_t size, int min_value, int max_value) {
+    // Rozkład jednostajny na [min_value, max_value]; silnik współdzielony między wywołaniami.
     if (min_value > max_value) {
         throw std::invalid_argument("min_value cannot be greater than max_value");
     }
@@ -34,6 +37,7 @@ std::vector<int> generate_random_data(std::size_t size, int min_value, int max_v
 }
 
 std::vector<int> generate_partially_sorted_data(std::size_t size, double sorted_fraction) {
+    // sorted_fraction × n pierwszych elementów zostaje 0..k-1; reszta tasowana (np. „prawie posortowane”).
     if (sorted_fraction < 0.0 || sorted_fraction > 1.0) {
         throw std::invalid_argument("sorted_fraction must be between 0.0 and 1.0");
     }
@@ -50,6 +54,7 @@ std::vector<int> generate_partially_sorted_data(std::size_t size, double sorted_
 }
 
 std::vector<int> generate_reverse_sorted_data(std::size_t size) {
+    // Ścisłe malejąco: n, n-1, … — częsty worst case dla naiwnego quicksorta (tu nie używane w make_case).
     std::vector<int> data(size);
 
     for (std::size_t index = 0; index < size; ++index) {

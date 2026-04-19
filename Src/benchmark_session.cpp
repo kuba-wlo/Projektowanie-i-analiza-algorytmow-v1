@@ -1,5 +1,7 @@
 #include "../Header/benchmark_session.hpp"
 
+// Składanie domyślnej sesji: 3 adaptery ISorter, osobne pliki CSV na algorytm, wywołanie run_all.
+
 #include <filesystem>
 #include <fstream>
 #include <locale>
@@ -14,6 +16,7 @@
 
 namespace {
 
+// Każdy adapter mapuje bool ascending z menu na sorting::SortOrder i woła szablon z nagłówka.
 class MergeSortAdapter : public ISorter {
 public:
     const char* name() const override {

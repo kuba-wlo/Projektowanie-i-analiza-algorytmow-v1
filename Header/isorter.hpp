@@ -2,6 +2,7 @@
 
 #include <vector>
 
+// Abstrakcja pod benchmark: dowolna implementacja sortowania intów w wektorze, z nazwą do CSV.
 class ISorter {
 public:
     virtual ~ISorter() = default;

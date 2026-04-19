@@ -1,5 +1,7 @@
 #pragma once
 
+// Wspólne: kierunek sortowania, porównania, walidacja posortowania, generatory danych (poza benchmarkiem).
+
 #include <chrono>
 #include <cstddef>
 #include <functional>
@@ -27,6 +29,7 @@ bool compare_values(const T& left, const T& right, SortOrder order) {
 
 template <typename T>
 bool is_sorted(const std::vector<T>& data, SortOrder order = SortOrder::Ascending) {
+    // Liniowe sprawdzenie: każdy element musi być „po właściwej stronie” względem poprzedniego.
     for (std::size_t index = 1; index < data.size(); ++index) {
         if (compare_values(data[index], data[index - 1], order)) {
             return false;

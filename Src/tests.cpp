@@ -1,5 +1,7 @@
 #include "../Header/tests.hpp"
 
+// Implementacja: generowanie przypadków testowych, pętla benchmarku (rozmiar × przypadek × powtórzenie × sorter).
+
 #include <algorithm>
 #include <chrono>
 #include <filesystem>
@@ -26,6 +28,7 @@ std::ostream* resolve_csv_stream(const std::map<std::string, std::ostream*>& csv
 }  // namespace
 
 const std::vector<CaseSpec>& all_cases() {
+    // Kolejność = kolejność w raporcie CSV / na ekranie postępu.
     static const std::vector<CaseSpec> cases = {
         {CaseKind::RandomAll, "random"},
         {CaseKind::Prefix25, "prefix_25%"},
@@ -44,11 +47,13 @@ void make_case(int* first, int* last, CaseKind kind, unsigned int seed) {
     const std::size_t size = static_cast<std::size_t>(last - first);
     std::mt19937 generator(seed);
 
+    // Losowość tylko przez shuffle — powtarzalność zależy od seed (powtórzenia w benchmarku).
     // Każdy przypadek startuje z tej samej uporządkowanej tablicy 0..n-1.
     for (std::size_t index = 0; index < size; ++index) {
         first[index] = static_cast<int>(index);
     }
 
+    // Ułamek elementów od końca tablicy do wymieszania; prefiks zostaje posortowany (0..k-1).
     double shuffle_ratio = 0.0;
     switch (kind) {
         case CaseKind::RandomAll:
@@ -85,6 +90,7 @@ void make_case(int* first, int* last, CaseKind kind, unsigned int seed) {
 }
 
 bool is_sorted(const int* first, const int* last, bool ascending) {
+    // Wersja na surowym wskaźniku — ta sama logika co w sorting::is_sorted, bez zależności od wektora.
     if (first >= last) {
         return true;
     }
@@ -130,6 +136,7 @@ void run_all(const TestSettings& cfg,
              const std::map<std::string, std::ostream*>& csv_out,
              bool print_human,
              StatusCallback status_callback) {
+    // Pętla zewnętrzna: rozmiar → przypadek → powtórzenia → sorterzy; średnia na końcu przypadku.
     if (print_human) {
         std::cout << "\nStarting benchmark session\n";
     }
@@ -164,6 +171,7 @@ void run_all(const TestSettings& cfg,
             std::map<std::string, bool> all_valid;
 
             for (int repetition = 0; repetition < cfg.repetitions_per_case; ++repetition) {
+                // base jest wspólne dla wszystkich sorterów w tej próbie; seed zmienia się z powtórzeniem.
                 make_case(base.data(), base.data() + static_cast<std::ptrdiff_t>(size),
                           spec.kind, cfg.base_seed + static_cast<unsigned int>(repetition));
 

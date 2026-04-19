@@ -1,5 +1,7 @@
 #pragma once
 
+// Jedna funkcja wejścia: domyślna sesja benchmarku trzech sortowań + ścieżki wygenerowanych CSV.
+
 #include <string>
 #include <vector>
 

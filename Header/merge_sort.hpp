@@ -1,5 +1,7 @@
 #pragma once
 
+// Merge sort: dziel i rządź, scalanie dwóch posortowanych połówek w buforze pomocniczym O(n).
+
 #include <cstddef>
 #include <vector>
 
@@ -16,6 +18,7 @@ void merge_ranges(std::vector<T>& data,
                   std::size_t middle,
                   std::size_t right,
                   SortOrder order) {
+    // Dwuwskaźnikowe scalanie [left, middle] i [middle+1, right] do buffer, potem kopiuj z powrotem.
     std::size_t left_index = left;
     std::size_t right_index = middle + 1;
     std::size_t buffer_index = left;
@@ -51,6 +54,7 @@ void merge_sort_recursive(std::vector<T>& data,
         return;
     }
 
+    // Środek zakresu, potem scalenie dwóch już posortowanych fragmentów.
     const std::size_t middle = left + (right - left) / 2;
     merge_sort_recursive(data, buffer, left, middle, order);
     merge_sort_recursive(data, buffer, middle + 1, right, order);
@@ -61,6 +65,7 @@ void merge_sort_recursive(std::vector<T>& data,
 
 template <typename T>
 void merge_sort(std::vector<T>& data, SortOrder order = SortOrder::Ascending) {
+    // Jeden bufor rozmiaru n na całe sortowanie — O(n) pamięci dodatkowej.
     if (data.size() < 2) {
         return;
     }

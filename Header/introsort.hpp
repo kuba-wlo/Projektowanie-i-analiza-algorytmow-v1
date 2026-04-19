@@ -1,5 +1,10 @@
 #pragma once
 
+// Introsort (std::sort-style): hybryda quicksort + heap sort + insertion sort.
+// Limit głębokości 2 * floor(log2 n) ogranicza najgorszy przypadek quicksorta; po jego
+// wyczerpaniu sortujemy heap sortem. Krótkie fragmenty domykamy insertion sortem (taniej
+// niż rekurencja). Pętla z eliminacją ogona rekurencji ogranicza wzrost stosu jak w typowym quicksortcie.
+
 #include <algorithm>
 #include <cstddef>
 #include <utility>
@@ -11,6 +16,7 @@ namespace sorting {
 
 namespace introsort_detail {
 
+// Poniżej tej długości zakresu rekurencja nie opłaca się — O(n²) insertion sorta jest małe n.
 inline constexpr std::size_t insertion_sort_threshold = 16;
 
 template <typename T>
@@ -18,6 +24,7 @@ void insertion_sort_range(std::vector<T>& data,
                           std::size_t left,
                           std::size_t right,
                           SortOrder order) {
+    // Klasyczne wstawianie w miejscu: stabilne dla małych n, bez dodatkowej pamięci.
     for (std::size_t index = left + 1; index <= right; ++index) {
         T value = std::move(data[index]);
         std::size_t insert_at = index;
@@ -36,6 +43,7 @@ std::size_t median_of_three(std::vector<T>& data,
                             std::size_t left,
                             std::size_t right,
                             SortOrder order) {
+    // Mediana z trzech indeksów (lewy, środek, prawy) — mniej partycji na „trudnych” danych.
     const std::size_t middle = left + (right - left) / 2;
 
     if (compare_values(data[middle], data[left], order)) {
@@ -58,6 +66,7 @@ std::size_t partition(std::vector<T>& data,
                       std::size_t left,
                       std::size_t right,
                       SortOrder order) {
+    // Lomuto: pivot na końcu, elementy „mniejsze od pivotu” zbieramy od lewej.
     const std::size_t pivot_index = median_of_three(data, left, right, order);
     const T pivot_value = data[pivot_index];
     std::swap(data[pivot_index], data[right]);
@@ -80,6 +89,7 @@ void heap_sort_range(std::vector<T>& data,
                      std::size_t left,
                      std::size_t right,
                      SortOrder order) {
+    // std::make_heap / sort_heap na slicie [left, right] — gwarancja O(n log n) na zakresie.
     auto begin = data.begin() + static_cast<std::ptrdiff_t>(left);
     auto end = data.begin() + static_cast<std::ptrdiff_t>(right + 1);
 
@@ -97,6 +107,8 @@ void intro_sort_recursive(std::vector<T>& data,
                           std::size_t right,
                           int depth_limit,
                           SortOrder order) {
+    // Zamiast dwóch wywołań rekurencyjnych: jedna rekurencja na mniejszą połowę,
+    // druga „ogon” obsługiwana w pętli — głębokość stosu O(log n).
     while (left < right) {
         if (right - left + 1 <= insertion_sort_threshold) {
             insertion_sort_range(data, left, right, order);
@@ -112,6 +124,7 @@ void intro_sort_recursive(std::vector<T>& data,
         const std::size_t left_size = pivot_index > left ? pivot_index - left : 0;
         const std::size_t right_size = right > pivot_index ? right - pivot_index : 0;
 
+        // Najpierw rekurencja w mniejszym podzakresie (ograniczenie stosu), potem kontynuacja.
         if (left_size < right_size) {
             if (pivot_index > left) {
                 intro_sort_recursive(data, left, pivot_index - 1, depth_limit - 1, order);
@@ -129,12 +142,14 @@ void intro_sort_recursive(std::vector<T>& data,
             right = pivot_index - 1;
         }
 
+        // Każda partycja zużywa jeden „poziom” quicksorta względem limitu introsorta.
         --depth_limit;
     }
 }
 
 template <typename T>
 int calculate_depth_limit(const std::vector<T>& data) {
+    // floor(log2 n) przez dzielenie przez 2; współczynnik 2 jak w typowym introsofcie (np. libc++).
     std::size_t range_size = data.size();
     int depth_limit = 0;
 
@@ -150,6 +165,7 @@ int calculate_depth_limit(const std::vector<T>& data) {
 
 template <typename T>
 void intro_sort(std::vector<T>& data, SortOrder order = SortOrder::Ascending) {
+    // Publiczne API: sortuje cały wektor wg SortOrder (domyślnie rosnąco).
     if (data.size() < 2) {
         return;
     }

@@ -1,5 +1,7 @@
 #pragma once
 
+// Silnik benchmarku: ustawienia, rodzaje danych testowych, pomiar czasu, zapis CSV.
+
 #include <cstddef>
 #include <functional>
 #include <map>
