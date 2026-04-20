@@ -1,0 +1,16 @@
+row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly
+average;merge_sort;10000;prefix_99.7%;-1;0.189254;1
+average;quicksort;10000;prefix_99.7%;-1;0.091705;1
+average;introsort;10000;prefix_99.7%;-1;0.084195;1
+average;merge_sort;50000;prefix_99.7%;-1;0.919749;1
+average;quicksort;50000;prefix_99.7%;-1;0.398221;1
+average;introsort;50000;prefix_99.7%;-1;0.381838;1
+average;merge_sort;100000;prefix_99.7%;-1;2.000832;1
+average;quicksort;100000;prefix_99.7%;-1;0.921015;1
+average;introsort;100000;prefix_99.7%;-1;0.979291;1
+average;merge_sort;500000;prefix_99.7%;-1;11.008491;1
+average;quicksort;500000;prefix_99.7%;-1;5.239878;1
+average;introsort;500000;prefix_99.7%;-1;4.949995;1
+average;merge_sort;1000000;prefix_99.7%;-1;22.939400;1
+average;quicksort;1000000;prefix_99.7%;-1;10.833278;1
+average;introsort;1000000;prefix_99.7%;-1;10.144748;1

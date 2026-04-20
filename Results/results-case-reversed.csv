@@ -1,0 +1,16 @@
+row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly
+average;merge_sort;10000;reversed;-1;0.180436;1
+average;quicksort;10000;reversed;-1;0.212660;1
+average;introsort;10000;reversed;-1;0.211437;1
+average;merge_sort;50000;reversed;-1;1.148325;1
+average;quicksort;50000;reversed;-1;1.249707;1
+average;introsort;50000;reversed;-1;1.228414;1
+average;merge_sort;100000;reversed;-1;2.105274;1
+average;quicksort;100000;reversed;-1;2.424105;1
+average;introsort;100000;reversed;-1;2.455224;1
+average;merge_sort;500000;reversed;-1;12.170481;1
+average;quicksort;500000;reversed;-1;14.698529;1
+average;introsort;500000;reversed;-1;15.425658;1
+average;merge_sort;1000000;reversed;-1;23.819731;1
+average;quicksort;1000000;reversed;-1;30.778136;1
+average;introsort;1000000;reversed;-1;32.604663;1
