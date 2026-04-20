@@ -18,6 +18,7 @@
 namespace {
 
 std::string averages_output_path(const TestSettings& cfg) {
+    // Z "results.csv" robi "results-averages.csv" (ten sam katalog i rozszerzenie).
     const std::filesystem::path base_path(cfg.csv_path);
     const std::string filename =
         base_path.stem().string() + "-averages" + base_path.extension().string();
@@ -44,6 +45,7 @@ std::map<std::string, std::string> case_averages_output_paths(const TestSettings
     const std::filesystem::path base_path(cfg.csv_path);
 
     for (const CaseSpec& spec : all_cases()) {
+        // Przykład: "results-case-prefix_99_7p.csv".
         const std::string filename = base_path.stem().string() + "-case-"
                                      + sanitize_case_name_for_filename(spec.name)
                                      + base_path.extension().string();
@@ -142,6 +144,7 @@ RunArtifacts prepare_sorter_outputs(const TestSettings& cfg, const std::vector<I
     averages_stream->imbue(std::locale::classic());
     (*averages_stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
 
+    // Klucz "all_averages" jest czytany przez tests.cpp przy zapisie globalnych średnich.
     artifacts.csv_streams["all_averages"] = averages_stream.get();
     artifacts.owned_csv_streams["all_averages"] = std::move(averages_stream);
 
@@ -160,6 +163,7 @@ RunArtifacts prepare_sorter_outputs(const TestSettings& cfg, const std::vector<I
         case_stream->imbue(std::locale::classic());
         (*case_stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
 
+        // Klucz "case_average:<nazwa_przypadku>" mapuje średnie do dedykowanego pliku przypadku.
         const std::string stream_key = "case_average:" + case_name;
         artifacts.csv_streams[stream_key] = case_stream.get();
         artifacts.owned_csv_streams[stream_key] = std::move(case_stream);

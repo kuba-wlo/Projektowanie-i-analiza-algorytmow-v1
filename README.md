@@ -103,14 +103,26 @@ Benchmark:
 
 ### 3. Warstwa wyników
 
-Każdy algorytm zapisuje swoje wyniki do osobnego pliku, np.:
+Program tworzy trzy grupy plików:
 
-- `Results/results-merge_sort.csv`
-- `Results/results-quicksort.csv`
-- `Results/results-introsort.csv`
+- pliki per algorytm (wiersze `trial` + `average`), np.:
+  - `Results/results-merge_sort.csv`
+  - `Results/results-quicksort.csv`
+  - `Results/results-introsort.csv`
+- wspólny plik średnich dla wszystkich algorytmów:
+  - `Results/results-averages.csv`
+- pliki średnich per przypadek wejścia:
+  - `Results/results-case-random.csv`
+  - `Results/results-case-prefix_25p.csv`
+  - `Results/results-case-prefix_50p.csv`
+  - `Results/results-case-prefix_75p.csv`
+  - `Results/results-case-prefix_95p.csv`
+  - `Results/results-case-prefix_99p.csv`
+  - `Results/results-case-prefix_99_7p.csv`
+  - `Results/results-case-reversed.csv`
 
 Ścieżka bazowa jest pobierana z `TestSettings::csv_path`, a nazwy plików są budowane
-automatycznie przez dopisanie nazwy sortera do nazwy bazowej.
+automatycznie od tej bazy.
 
 ## Przypadki testowe
 
@@ -141,13 +153,16 @@ W `main.cpp` domyślny seed dla sesji benchmarkowej jest ustawiony na `20260418`
 
 ## Format wyników CSV
 
-Program zapisuje dane w formacie:
+Wiersze mają format:
 
 ```text
 row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly
 trial;merge_sort;10000;random;0;1.234567;1
 average;merge_sort;10000;random;-1;1.456789;1
 ```
+
+`row_type=trial` pojawia się tylko w plikach per algorytm. Pliki `*-averages.csv`
+oraz `results-case-*.csv` zawierają wyłącznie wiersze `average`.
 
 Znaczenie kolumn:
 
@@ -172,7 +187,7 @@ Znaczenie kolumn:
 
 ## Kompilacja
 
-### PowerShell
+### PowerShell (Windows)
 
 W katalogu głównym projektu:
 
@@ -199,11 +214,17 @@ g++ -std=c++17 -O2 Src/main.cpp Src/benchmark_session.cpp Src/tests.cpp Src/util
 
 Po kompilacji:
 
+```powershell
+.\projekt.exe
+```
+
+W `MSYS2` można użyć też:
+
 ```bash
 ./projekt.exe
 ```
 
-Program uruchamia menu tekstowe w terminalu.
+Program uruchamia tekstowe menu benchmarku.
 
 ## Co można ustawić z poziomu programu
 
@@ -213,6 +234,8 @@ Z poziomu menu można zmienić:
 - seed generatora,
 - bazową ścieżkę plików CSV,
 - kierunek sortowania.
+
+Rozmiary tablic pozostają zgodne z wymaganiami projektu (`10k`, `50k`, `100k`, `500k`, `1M`).
 
 
 ## Najważniejsze cechy projektu
