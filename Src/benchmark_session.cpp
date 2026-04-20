@@ -16,6 +16,16 @@
 
 namespace {
 
+std::string averages_output_path(const TestSettings& cfg) {
+    const std::filesystem::path base_path(cfg.csv_path);
+    const std::string filename =
+        base_path.stem().string() + "-averages" + base_path.extension().string();
+    const std::filesystem::path output_path =
+        base_path.has_parent_path() ? base_path.parent_path() / filename
+                                    : std::filesystem::path(filename);
+    return output_path.string();
+}
+
 // Każdy adapter mapuje bool ascending z menu na sorting::SortOrder i woła szablon z nagłówka.
 class MergeSortAdapter : public ISorter {
 public:
@@ -88,6 +98,23 @@ RunArtifacts prepare_sorter_outputs(const TestSettings& cfg, const std::vector<I
         artifacts.owned_csv_streams[sorters[index]->name()] = std::move(stream);
     }
 
+    const std::string averages_path = averages_output_path(cfg);
+    const std::filesystem::path averages_path_fs(averages_path);
+    if (averages_path_fs.has_parent_path()) {
+        std::filesystem::create_directories(averages_path_fs.parent_path());
+    }
+
+    auto averages_stream = std::make_unique<std::ofstream>(averages_path);
+    if (!averages_stream->is_open()) {
+        throw std::runtime_error("Could not open averages CSV file.");
+    }
+
+    averages_stream->imbue(std::locale::classic());
+    (*averages_stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
+
+    artifacts.csv_streams["all_averages"] = averages_stream.get();
+    artifacts.owned_csv_streams["all_averages"] = std::move(averages_stream);
+
     return artifacts;
 }
 
@@ -107,6 +134,7 @@ BenchmarkOutputs run_default_benchmark(const TestSettings& cfg,
     // Najpierw wyliczamy ścieżki, potem uruchamiamy jedną wspólną sesję benchmarku.
     BenchmarkOutputs outputs;
     outputs.csv_paths = csv_output_paths(cfg, sorters);
+    outputs.averages_csv_path = averages_output_path(cfg);
 
     RunArtifacts artifacts = prepare_sorter_outputs(cfg, sorters);
     run_all(cfg, sorters, artifacts.csv_streams, print_human, std::move(status_callback));
