@@ -32,6 +32,15 @@ std::ostream* resolve_averages_stream(const std::map<std::string, std::ostream*>
     return nullptr;
 }
 
+std::ostream* resolve_case_averages_stream(const std::map<std::string, std::ostream*>& csv_out,
+                                           const char* case_name) {
+    const std::string key = "case_average:" + std::string(case_name);
+    if (const auto iterator = csv_out.find(key); iterator != csv_out.end()) {
+        return iterator->second;
+    }
+    return nullptr;
+}
+
 }  // namespace
 
 const std::vector<CaseSpec>& all_cases() {
@@ -213,6 +222,8 @@ void run_all(const TestSettings& cfg,
                 const char* sorter_name = sorter->name();
                 std::ostream* stream = resolve_csv_stream(csv_out, sorter_name);
                 std::ostream* averages_stream = resolve_averages_stream(csv_out);
+                std::ostream* case_averages_stream =
+                    resolve_case_averages_stream(csv_out, spec.name);
 
                 if (stream != nullptr) {
                     // Wiersz average podsumowuje wszystkie próby dla danego rozmiaru i przypadku.
@@ -228,6 +239,14 @@ void run_all(const TestSettings& cfg,
                         (*averages_stream) << "average;" << sorter_name << ';' << size << ';'
                                            << spec.name << ';' << -1 << ';' << average_time << ';'
                                            << (all_valid[sorter_name] ? 1 : 0) << '\n';
+                    }
+
+                    if (case_averages_stream != nullptr) {
+                        (*case_averages_stream) << std::fixed << std::setprecision(6);
+                        (*case_averages_stream) << "average;" << sorter_name << ';' << size
+                                                << ';' << spec.name << ';' << -1 << ';'
+                                                << average_time << ';'
+                                                << (all_valid[sorter_name] ? 1 : 0) << '\n';
                     }
                 }
             }

@@ -12,6 +12,8 @@ struct BenchmarkOutputs {
     std::vector<std::string> csv_paths;
     // Wspólny plik z samymi wierszami average dla wszystkich sorterów.
     std::string averages_csv_path;
+    // Pliki per przypadek (random/prefix/reversed) z samymi średnimi.
+    std::vector<std::string> case_averages_csv_paths;
 };
 
 // Uruchamia standardowy zestaw 3 algorytmów wymaganych w projekcie.

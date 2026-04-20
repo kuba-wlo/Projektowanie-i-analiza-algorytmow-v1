@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <fstream>
 #include <locale>
+#include <map>
 #include <memory>
 #include <stdexcept>
 #include <vector>
@@ -24,6 +25,35 @@ std::string averages_output_path(const TestSettings& cfg) {
         base_path.has_parent_path() ? base_path.parent_path() / filename
                                     : std::filesystem::path(filename);
     return output_path.string();
+}
+
+std::string sanitize_case_name_for_filename(const std::string& case_name) {
+    std::string sanitized = case_name;
+    for (char& character : sanitized) {
+        if (character == '%') {
+            character = 'p';
+        } else if (character == '.') {
+            character = '_';
+        }
+    }
+    return sanitized;
+}
+
+std::map<std::string, std::string> case_averages_output_paths(const TestSettings& cfg) {
+    std::map<std::string, std::string> paths;
+    const std::filesystem::path base_path(cfg.csv_path);
+
+    for (const CaseSpec& spec : all_cases()) {
+        const std::string filename = base_path.stem().string() + "-case-"
+                                     + sanitize_case_name_for_filename(spec.name)
+                                     + base_path.extension().string();
+        const std::filesystem::path output_path =
+            base_path.has_parent_path() ? base_path.parent_path() / filename
+                                        : std::filesystem::path(filename);
+        paths[spec.name] = output_path.string();
+    }
+
+    return paths;
 }
 
 // Każdy adapter mapuje bool ascending z menu na sorting::SortOrder i woła szablon z nagłówka.
@@ -115,6 +145,26 @@ RunArtifacts prepare_sorter_outputs(const TestSettings& cfg, const std::vector<I
     artifacts.csv_streams["all_averages"] = averages_stream.get();
     artifacts.owned_csv_streams["all_averages"] = std::move(averages_stream);
 
+    const std::map<std::string, std::string> case_paths = case_averages_output_paths(cfg);
+    for (const auto& [case_name, case_path] : case_paths) {
+        const std::filesystem::path case_path_fs(case_path);
+        if (case_path_fs.has_parent_path()) {
+            std::filesystem::create_directories(case_path_fs.parent_path());
+        }
+
+        auto case_stream = std::make_unique<std::ofstream>(case_path);
+        if (!case_stream->is_open()) {
+            throw std::runtime_error("Could not open case averages CSV file.");
+        }
+
+        case_stream->imbue(std::locale::classic());
+        (*case_stream) << "row_type;algorithm;size;case_name;run_number;time_ms;sorted_correctly\n";
+
+        const std::string stream_key = "case_average:" + case_name;
+        artifacts.csv_streams[stream_key] = case_stream.get();
+        artifacts.owned_csv_streams[stream_key] = std::move(case_stream);
+    }
+
     return artifacts;
 }
 
@@ -135,6 +185,10 @@ BenchmarkOutputs run_default_benchmark(const TestSettings& cfg,
     BenchmarkOutputs outputs;
     outputs.csv_paths = csv_output_paths(cfg, sorters);
     outputs.averages_csv_path = averages_output_path(cfg);
+    const std::map<std::string, std::string> case_paths = case_averages_output_paths(cfg);
+    for (const auto& [_, path] : case_paths) {
+        outputs.case_averages_csv_paths.push_back(path);
+    }
 
     RunArtifacts artifacts = prepare_sorter_outputs(cfg, sorters);
     run_all(cfg, sorters, artifacts.csv_streams, print_human, std::move(status_callback));
